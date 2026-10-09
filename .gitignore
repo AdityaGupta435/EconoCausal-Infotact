@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+.pytest_cache/
+
+# Node
+node_modules/
+dist/
+
+# Environment variables
+.env
+.env.*
+
+# Generated data and model files
+data/raw/
+data/processed/
+*.joblib
+*.pkl
+*.pth
+
+# Editor and OS files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
