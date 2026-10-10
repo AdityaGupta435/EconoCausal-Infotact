@@ -24,3 +24,9 @@ data/processed/
 .idea/
 .DS_Store
 Thumbs.db
+
+# Generated synthetic datasets and evaluation outputs
+data/synthetic/*.csv
+data/synthetic/splits/
+data/synthetic/eda_output/
+data/synthetic/eda_report.txt
