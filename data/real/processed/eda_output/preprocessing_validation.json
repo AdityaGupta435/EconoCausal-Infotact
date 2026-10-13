@@ -1,0 +1,69 @@
+{
+  "dataset_path": "D:\\EconoCausal\\data\\real\\processed\\criteo_sample.csv",
+  "rows": 100000,
+  "columns": 16,
+  "required_columns_present": true,
+  "missing_required_columns": [],
+  "non_numeric_columns": [],
+  "missing_cells": 0,
+  "missing_by_column": {
+    "f0": 0,
+    "f1": 0,
+    "f2": 0,
+    "f3": 0,
+    "f4": 0,
+    "f5": 0,
+    "f6": 0,
+    "f7": 0,
+    "f8": 0,
+    "f9": 0,
+    "f10": 0,
+    "f11": 0,
+    "treatment": 0,
+    "conversion": 0,
+    "visit": 0,
+    "exposure": 0
+  },
+  "non_finite_values_by_column": {
+    "f0": 0,
+    "f1": 0,
+    "f2": 0,
+    "f3": 0,
+    "f4": 0,
+    "f5": 0,
+    "f6": 0,
+    "f7": 0,
+    "f8": 0,
+    "f9": 0,
+    "f10": 0,
+    "f11": 0,
+    "treatment": 0,
+    "conversion": 0,
+    "visit": 0,
+    "exposure": 0
+  },
+  "invalid_binary_values": {
+    "treatment": [],
+    "conversion": [],
+    "visit": [],
+    "exposure": []
+  },
+  "exact_duplicate_rows": 79,
+  "treatment_counts": {
+    "1": 85022,
+    "0": 14978
+  },
+  "outcome_rates_by_treatment": {
+    "0": {
+      "conversion": 0.002136466817999733,
+      "visit": 0.03992522366137001,
+      "exposure": 0.0
+    },
+    "1": {
+      "conversion": 0.003175648655642069,
+      "visit": 0.048716802709886854,
+      "exposure": 0.03566135823669168
+    }
+  },
+  "checks_passed": true
+}
