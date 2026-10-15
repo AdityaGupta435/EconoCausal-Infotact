@@ -1,0 +1,11 @@
+{
+  "model": "EconML LinearDML",
+  "training_rows": 6000,
+  "test_rows": 2000,
+  "encoded_features": 6,
+  "predicted_test_ate": 0.0763443179943662,
+  "ground_truth_test_ate": 0.05380250000000001,
+  "ate_absolute_error": 0.022541817994366185,
+  "ite_mae": 0.02905704785591388,
+  "ite_rmse": 0.0353595126667782
+}
