@@ -103,6 +103,22 @@ def main():
     model = make_model()
     model.fit(Y_train, T_train, X=X_train)
 
+    
+    # Overall ATE confidence interval from the fitted EconML model.
+    ate_interval = model.ate_interval(
+        X=X_train,
+        T0=0,
+        T1=1,
+        alpha=0.05,
+    )
+
+    print(
+        "Training-sample ATE 95% confidence interval: "
+        f"({float(np.asarray(ate_interval[0]).squeeze()):.4f}, "
+        f"{float(np.asarray(ate_interval[1]).squeeze()):.4f})"
+    )
+
+
     # Load held-out test data. Do not use it for model fitting.
     split_dir = SPLIT_DIR
     test = pd.read_csv(split_dir / "test.csv")
@@ -138,6 +154,94 @@ def main():
 
     if len(predicted_effects) != len(true_effects):
         raise ValueError("Prediction and ground-truth lengths do not match.")
+    
+    
+       # Segment-level effect estimates on held-out test observations.
+    test_segments = test[["category", "customer_history"]].copy()
+    test_segments["predicted_ite"] = predicted_effects
+
+    # Convert customer history into interpretable business segments.
+    test_segments["history_segment"] = pd.cut(
+        test_segments["customer_history"],
+        bins=[-1, 1, 4, np.inf],
+        labels=["Low (0-1)", "Medium (2-4)", "High (5+)"],
+    )
+
+    segment_rows = []
+
+    # Category-level analysis.
+    for segment_value, indices in test_segments.groupby(
+        "category", sort=True
+    ).groups.items():
+        indices = np.asarray(list(indices), dtype=int)
+        X_segment = X_test[indices]
+
+        interval = model.ate_interval(
+            X=X_segment,
+            T0=0,
+            T1=1,
+            alpha=0.05,
+        )
+
+        segment_rows.append(
+            {
+                "segment_feature": "category",
+                "segment_value": str(segment_value),
+                "sample_count": int(len(indices)),
+                "mean_predicted_ite": float(
+                    np.mean(predicted_effects[indices])
+                ),
+                "ci_95_lower": float(
+                    np.asarray(interval[0]).squeeze()
+                ),
+                "ci_95_upper": float(
+                    np.asarray(interval[1]).squeeze()
+                ),
+            }
+        )
+
+    # Customer-history segment analysis.
+    for segment_value, indices in test_segments.groupby(
+        "history_segment", observed=True, sort=True
+    ).groups.items():
+        indices = np.asarray(list(indices), dtype=int)
+        X_segment = X_test[indices]
+
+        interval = model.ate_interval(
+            X=X_segment,
+            T0=0,
+            T1=1,
+            alpha=0.05,
+        )
+
+        segment_rows.append(
+            {
+                "segment_feature": "customer_history",
+                "segment_value": str(segment_value),
+                "sample_count": int(len(indices)),
+                "mean_predicted_ite": float(
+                    np.mean(predicted_effects[indices])
+                ),
+                "ci_95_lower": float(
+                    np.asarray(interval[0]).squeeze()
+                ),
+                "ci_95_upper": float(
+                    np.asarray(interval[1]).squeeze()
+                ),
+            }
+        )
+
+    segment_report = pd.DataFrame(segment_rows)
+
+    segment_path = (
+        ROOT / "data" / "synthetic" / "econml_segment_analysis.csv"
+    )
+    segment_report.to_csv(segment_path, index=False)
+
+    print(f"Segment report saved: {segment_path}")
+    print("\nSEGMENT-LEVEL ESTIMATED TREATMENT EFFECTS")
+    print(segment_report.to_string(index=False))
+
 
     predicted_ate = float(np.mean(predicted_effects))
     true_ate = float(np.mean(true_effects))
