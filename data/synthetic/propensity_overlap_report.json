@@ -1,0 +1,38 @@
+{
+  "model": "HistGradientBoostingClassifier",
+  "purpose": "Propensity score and overlap diagnostics",
+  "training_rows": 6000,
+  "test_rows": 2000,
+  "test_propensity_auc": 0.5497848088993429,
+  "common_score_range": [
+    0.11567818602853877,
+    0.7526635372553315
+  ],
+  "control_fraction_in_common_range": 1.0,
+  "treatment_fraction_in_common_range": 0.9961240310077519,
+  "score_distributions": [
+    {
+      "group": "Control",
+      "sample_count": 1226,
+      "score_min": 0.11567818602853877,
+      "score_q01": 0.15767647614873875,
+      "score_q25": 0.30932567499608493,
+      "score_median": 0.36989939254680776,
+      "score_q75": 0.4446932720472083,
+      "score_q99": 0.6546362799078331,
+      "score_max": 0.7526635372553315
+    },
+    {
+      "group": "Treatment",
+      "sample_count": 774,
+      "score_min": 0.0911529462290583,
+      "score_q01": 0.1960480360370978,
+      "score_q25": 0.3265740977481015,
+      "score_median": 0.3872987185521135,
+      "score_q75": 0.46236687472138005,
+      "score_q99": 0.6480090753621965,
+      "score_max": 0.7840025147257818
+    }
+  ],
+  "interpretation_note": "This is a descriptive overlap diagnostic. A common score range alone does not establish adequate overlap or prove causal identification."
+}
