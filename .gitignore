@@ -30,3 +30,6 @@ data/synthetic/*.csv
 data/synthetic/splits/
 data/synthetic/eda_output/
 data/synthetic/eda_report.txt
+# Real-world dataset files (keep large data out of Git)
+data/real/raw/
+data/real/processed/criteo_sample.csv
