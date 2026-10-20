@@ -1,0 +1,18 @@
+{
+  "evaluation": "synthetic held-out test set",
+  "training_rows": 6000,
+  "test_rows": 2000,
+  "treatment_rows": 774,
+  "control_rows": 1226,
+  "predicted_ite_mae": 0.02905704785591388,
+  "predicted_ite_rmse": 0.0353595126667782,
+  "observed_qini_area": 27.789577464261903,
+  "random_qini_area_mean_30_runs": 29.05259890610439,
+  "qini_area_difference_vs_random": -1.2630214418424863,
+  "top_20_percent": {
+    "model_ranked_mean_true_effect": 0.05526250000000001,
+    "random_targeting_mean_true_effect": 0.05380250000000001,
+    "oracle_ranked_mean_true_effect": 0.07328749999999998
+  },
+  "interpretation": "Observed Qini is a noisy ranking diagnostic on this synthetic test set, not proof of real-world causal validity. True effects are used only for evaluation, never as model features."
+}

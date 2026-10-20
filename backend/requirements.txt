@@ -4,6 +4,6 @@ numpy
 pandas
 scikit-learn
 pytest
+econml==0.17.0
 dowhy==0.8
-networkx==2.8.8
 networkx==2.8.8
