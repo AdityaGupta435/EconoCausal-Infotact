@@ -1,0 +1,14 @@
+{
+  "dataset": "synthetic retail held-out test split",
+  "candidate_count": 2000,
+  "training_rows": 6000,
+  "discount_pct": 10.0,
+  "budget_assumption": "10% of the test candidates' total 10%-discount cost",
+  "budget": 1385.5999000000002,
+  "selected_count": 526,
+  "total_cost": 1385.5700000000002,
+  "unused_budget": 0.029899999999997817,
+  "expected_incremental_purchases": 46.91871523602407,
+  "solver_status": "optimal",
+  "causal_interpretation": "Expected incremental purchases are summed predicted ITEs. These are model-based estimates on synthetic data, not observed incremental purchases or a real-world causal guarantee."
+}
