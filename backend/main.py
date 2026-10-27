@@ -3,7 +3,9 @@ from pathlib import Path
 
 import numpy as np
 import pandas as pd
-from fastapi import FastAPI, HTTPException
+import csv
+import io
+from fastapi import FastAPI, HTTPException,File,UploadFile
 from pydantic import BaseModel, Field
 
 from backend.causal_model import DATA_DIR, estimate_ate
@@ -160,3 +162,76 @@ def optimize_promotions(request: OptimizationRequest):
             status_code=500,
             detail=f"Optimization failed: {exc}",
         ) from exc
+
+
+@app.post("/api/data/upload")
+async def upload_csv(file: UploadFile = File(...)):
+    if not file.filename or not file.filename.lower().endswith(".csv"):
+        raise HTTPException(
+            status_code=400,
+            detail="Only CSV files are allowed."
+        )
+
+    content = await file.read()
+
+    if not content:
+        raise HTTPException(
+            status_code=400,
+            detail="Uploaded file is empty."
+        )
+
+    if len(content) > 10 * 1024 * 1024:
+        raise HTTPException(
+            status_code=413,
+            detail="File size must not exceed 10 MB."
+        )
+
+    try:
+        csv_text = content.decode("utf-8-sig")
+        df = pd.read_csv(io.StringIO(csv_text))
+    except (UnicodeDecodeError, pd.errors.ParserError, ValueError) as exc:
+        raise HTTPException(
+            status_code=400,
+            detail="Invalid CSV file or encoding."
+        ) from exc
+
+    if df.empty:
+        raise HTTPException(
+            status_code=400,
+            detail="CSV file contains no data rows."
+        )
+
+    required_columns = {
+        "baseline_price",
+        "customer_history",
+        "seasonality",
+        "category",
+        "treatment",
+        "purchase",
+    }
+
+    missing_columns = sorted(required_columns - set(df.columns))
+
+    if missing_columns:
+        raise HTTPException(
+            status_code=422,
+            detail={
+                "message": "Required columns are missing.",
+                "missing_columns": missing_columns,
+            },
+        )
+
+    if df[list(required_columns)].isnull().any().any():
+        raise HTTPException(
+            status_code=422,
+            detail="Required columns must not contain empty values."
+        )
+
+    return {
+        "message": "CSV validated successfully.",
+        "filename": file.filename,
+        "row_count": int(len(df)),
+        "columns": list(df.columns),
+        "preview": df.head(5).to_json(orient="records", force_ascii=False),
+        "saved_to_disk": False,
+    }

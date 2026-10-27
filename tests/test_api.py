@@ -79,3 +79,44 @@ def test_optimization_endpoint():
     assert body["selected_count"] == 2
     assert body["total_cost"] == 30.0
     assert body["expected_incremental_purchases"] == 0.2
+
+
+def test_csv_upload_success():
+    csv_content = (
+        "baseline_price,customer_history,seasonality,category,treatment,purchase\n"
+        "100,5,1,A,1,1\n"
+        "200,3,0,B,0,0\n"
+    )
+
+    response = client.post(
+        "/api/data/upload",
+        files={"file": ("dataset.csv", csv_content, "text/csv")},
+    )
+
+    assert response.status_code == 200
+    body = response.json()
+    assert body["row_count"] == 2
+    assert "baseline_price" in body["columns"]
+    assert body["saved_to_disk"] is False
+
+
+def test_csv_upload_rejects_non_csv_file():
+    response = client.post(
+        "/api/data/upload",
+        files={"file": ("dataset.txt", "sample data", "text/plain")},
+    )
+
+    assert response.status_code == 400
+    assert response.json()["detail"] == "Only CSV files are allowed."
+
+
+def test_csv_upload_rejects_missing_required_columns():
+    csv_content = "baseline_price,category\n100,A\n"
+
+    response = client.post(
+        "/api/data/upload",
+        files={"file": ("dataset.csv", csv_content, "text/csv")},
+    )
+
+    assert response.status_code == 422
+    assert "missing_columns" in response.json()["detail"]
