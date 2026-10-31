@@ -4,6 +4,7 @@ import Sidebar from "./components/layout/Sidebar";
 import Header from "./components/layout/Header";
 import DataUpload from "./pages/DataUpload";
 import AnalyticsDashboard from "./pages/AnalyticsDashboard";
+import AllocationDashboard from "./pages/AllocationDashboard";
 import "./App.css";
 
 export default function App() {
@@ -13,6 +14,9 @@ export default function App() {
     switch (activePage) {
       case "Data Management":
         return <DataUpload />;
+
+      case "Budget Optimizer":
+        return <AllocationDashboard />;
 
       case "Overview":
       case "Causal Effects":

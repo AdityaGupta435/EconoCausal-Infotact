@@ -64,9 +64,21 @@ def test_optimization_endpoint():
         "/api/optimization",
         json={
             "candidates": [
-                {"baseline_price": 100, "predicted_ite": 0.08},
-                {"baseline_price": 200, "predicted_ite": 0.12},
-                {"baseline_price": 150, "predicted_ite": -0.01},
+                {
+                    "customer_id": "CUST001",
+                    "baseline_price": 100,
+                    "predicted_ite": 0.08,
+                },
+                {
+                    "customer_id": "CUST002",
+                    "baseline_price": 200,
+                    "predicted_ite": 0.12,
+                },
+                {
+                    "customer_id": "CUST003",
+                    "baseline_price": 150,
+                    "predicted_ite": -0.01,
+                },
             ],
             "budget": 30,
             "discount_pct": 10,
@@ -74,12 +86,25 @@ def test_optimization_endpoint():
     )
 
     assert response.status_code == 200
+
     body = response.json()
+
     assert body["selected_indices"] == [0, 1]
     assert body["selected_count"] == 2
     assert body["total_cost"] == 30.0
     assert body["expected_incremental_purchases"] == 0.2
 
+    assert len(body["allocation"]) == 3
+
+    assert body["allocation"][0]["customer_id"] == "CUST001"
+    assert body["allocation"][1]["customer_id"] == "CUST002"
+    assert body["allocation"][2]["customer_id"] == "CUST003"
+
+    assert body["allocation"][0]["selected"] is True
+    assert body["allocation"][1]["selected"] is True
+    assert body["allocation"][2]["selected"] is False
+
+    assert body["allocation"][2]["status"] == "Not Selected"
 
 def test_csv_upload_success():
     csv_content = (

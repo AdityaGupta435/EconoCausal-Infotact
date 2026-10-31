@@ -25,9 +25,12 @@ app = FastAPI(
 )
 
 
+
 class OptimizationCandidate(BaseModel):
+    customer_id: str = Field(min_length=1, max_length=100)
     baseline_price: float = Field(gt=0)
     predicted_ite: float
+
 
 
 class OptimizationRequest(BaseModel):
@@ -113,16 +116,30 @@ def uplift_evaluation():
         ) from exc
 
 
+
 @app.post("/api/optimization")
 def optimize_promotions(request: OptimizationRequest):
-    """Allocate a budget using supplied predicted treatment effects."""
+    """Allocate promotion budget and explain each customer decision."""
     try:
-        candidates = pd.DataFrame(
-            [
-                candidate.model_dump()
-                for candidate in request.candidates
-            ]
-        )
+        customer_ids = [
+            candidate.customer_id.strip()
+            for candidate in request.candidates
+        ]
+
+        if any(not customer_id for customer_id in customer_ids):
+            raise ValueError("Customer IDs cannot be empty.")
+
+        if len(customer_ids) != len(set(customer_ids)):
+            raise ValueError("Customer IDs must be unique.")
+
+        candidates = pd.DataFrame([
+            {
+                "customer_id": candidate.customer_id.strip(),
+                "baseline_price": candidate.baseline_price,
+                "predicted_ite": candidate.predicted_ite,
+            }
+            for candidate in request.candidates
+        ])
 
         problem = build_optimization_problem(
             candidates=candidates,
@@ -131,6 +148,39 @@ def optimize_promotions(request: OptimizationRequest):
         )
 
         result = solve_optimization_problem(problem)
+        selected_indices = set(result.selected_indices)
+        allocation = []
+
+        for index, candidate in candidates.iterrows():
+            selected = index in selected_indices
+            ite = float(candidate["predicted_ite"])
+
+            if selected:
+                explanation = (
+                    "Selected by the optimizer because its positive "
+                    "predicted effect contributes to the optimal "
+                    "budget-constrained allocation."
+                )
+            elif ite <= 0:
+                explanation = (
+                    "Not selected because the predicted treatment "
+                    "effect is zero or negative."
+                )
+            else:
+                explanation = (
+                    "Not selected because it was excluded by the "
+                    "optimal budget-constrained allocation."
+                )
+
+            allocation.append({
+                "customer_id": candidate["customer_id"],
+                "baseline_price": float(candidate["baseline_price"]),
+                "predicted_ite": ite,
+                "promotion_cost": float(problem.promotion_costs[index]),
+                "selected": selected,
+                "status": "Selected" if selected else "Not Selected",
+                "explanation": explanation,
+            })
 
         return {
             "objective": problem.objective_description,
@@ -145,6 +195,7 @@ def optimize_promotions(request: OptimizationRequest):
             "expected_incremental_purchases": (
                 result.expected_incremental_purchases
             ),
+            "allocation": allocation,
             "interpretation": (
                 "Expected incremental purchases are model predictions, "
                 "not guaranteed or observed purchases. Costs use the "
@@ -153,15 +204,13 @@ def optimize_promotions(request: OptimizationRequest):
         }
 
     except (ValueError, TypeError) as exc:
-        raise HTTPException(
-            status_code=422,
-            detail=str(exc),
-        ) from exc
+        raise HTTPException(status_code=422, detail=str(exc)) from exc
     except RuntimeError as exc:
         raise HTTPException(
             status_code=500,
             detail=f"Optimization failed: {exc}",
         ) from exc
+
 
 
 @app.post("/api/data/upload")
