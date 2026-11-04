@@ -9,6 +9,7 @@ from fastapi import FastAPI, HTTPException,File,UploadFile
 from pydantic import BaseModel, Field
 
 from backend.causal_model import DATA_DIR, estimate_ate
+from backend.drift_detection import generate_drift_report
 from backend.optimization import (
     build_optimization_problem,
     solve_optimization_problem,
@@ -51,6 +52,42 @@ def home():
 @app.get("/health")
 def health():
     return {"status": "healthy"}
+
+
+
+@app.get("/api/drift")
+def get_drift_report():
+    """Compare reference and current feature distributions."""
+
+    reference_path = ROOT / "data" / "synthetic" / "splits" / "train.csv"
+    current_path = ROOT / "data" / "synthetic" / "splits" / "test.csv"
+
+    if not reference_path.is_file() or not current_path.is_file():
+        raise HTTPException(
+            status_code=503,
+            detail="Reference or current dataset is unavailable.",
+        )
+
+    try:
+        reference = pd.read_csv(reference_path)
+        current = pd.read_csv(current_path)
+
+        report = generate_drift_report(reference, current)
+
+        return report
+
+    except ValueError as error:
+        raise HTTPException(
+            status_code=422,
+            detail=str(error),
+        ) from error
+
+    except Exception as error:
+        raise HTTPException(
+            status_code=500,
+            detail=f"Drift monitoring failed: {str(error)}",
+        ) from error
+
 
 
 @app.get("/api/causal/ate")

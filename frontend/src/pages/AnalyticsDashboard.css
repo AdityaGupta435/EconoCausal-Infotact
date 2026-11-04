@@ -189,3 +189,155 @@
     grid-template-columns: 1fr;
   }
 }
+
+
+/* Day 19 - Data Drift Monitoring */
+
+.analytics-drift-section {
+  margin-bottom: 22px;
+  padding: 22px;
+  border: 1px solid #e8edf6;
+  border-radius: 16px;
+  background: #ffffff;
+  box-shadow: 0 4px 18px #263c6508;
+}
+
+.analytics-drift-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.analytics-drift-heading h2 {
+  margin: 8px 0;
+  color: #1b2949;
+  font-size: 19px;
+  font-weight: 750;
+}
+
+.analytics-drift-heading p {
+  margin: 0;
+  color: #7c879e;
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+.analytics-drift-status,
+.analytics-feature-status {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 7px 12px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 750;
+  white-space: nowrap;
+}
+
+.drift-stable {
+  border: 1px solid #bce8d2;
+  background: #eaf8f0;
+  color: #16804a;
+}
+
+.drift-warning {
+  border: 1px solid #f3d49a;
+  background: #fff6e5;
+  color: #a56608;
+}
+
+.analytics-drift-metrics {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+  margin-bottom: 18px;
+}
+
+.analytics-drift-message {
+  margin-bottom: 18px;
+  padding: 14px 16px;
+  border-radius: 10px;
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+.analytics-drift-message strong {
+  display: block;
+  margin-bottom: 4px;
+}
+
+.analytics-drift-message p {
+  margin: 0;
+}
+
+.drift-message-stable {
+  border: 1px solid #d5eadf;
+  background: #f2faf5;
+  color: #286b48;
+}
+
+.drift-message-warning {
+  border: 1px solid #f3dfb9;
+  background: #fff9ed;
+  color: #895b16;
+}
+
+.analytics-drift-table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  border: 1px solid #e8edf6;
+  border-radius: 10px;
+}
+
+.analytics-drift-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 12px;
+}
+
+.analytics-drift-table th {
+  padding: 13px 15px;
+  background: #f7f9fc;
+  color: #65718a;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.analytics-drift-table td {
+  padding: 13px 15px;
+  border-top: 1px solid #edf0f6;
+  color: #34415f;
+}
+
+.analytics-drift-table td:first-child {
+  color: #1b2949;
+  font-weight: 650;
+}
+
+.analytics-drift-table .analytics-feature-status {
+  padding: 5px 10px;
+}
+
+@media (max-width: 1100px) {
+  .analytics-drift-metrics {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 600px) {
+  .analytics-drift-section {
+    padding: 16px;
+  }
+
+  .analytics-drift-heading {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .analytics-drift-metrics {
+    grid-template-columns: 1fr;
+  }
+}

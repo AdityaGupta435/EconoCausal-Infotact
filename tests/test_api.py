@@ -1,4 +1,3 @@
-
 from fastapi.testclient import TestClient
 
 from backend.main import app
@@ -145,3 +144,27 @@ def test_csv_upload_rejects_missing_required_columns():
 
     assert response.status_code == 422
     assert "missing_columns" in response.json()["detail"]
+
+
+
+def test_drift_endpoint_returns_report():
+    response = client.get("/api/drift")
+
+    assert response.status_code == 200
+
+    body = response.json()
+
+    assert body["status"] == "stable"
+    assert body["drift_detected"] is False
+    assert body["total_features"] == 5
+    assert body["drifted_feature_count"] == 0
+    assert body["drifted_features"] == []
+
+    assert body["reference_rows"] == 6000
+    assert body["current_rows"] == 2000
+
+    assert "baseline_price" in body["features"]
+    assert "customer_history" in body["features"]
+    assert "seasonality" in body["features"]
+    assert "product_id" in body["features"]
+    assert "category" in body["features"]

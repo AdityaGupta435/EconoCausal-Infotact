@@ -6,6 +6,7 @@ import "./AnalyticsDashboard.css";
 const API_ENDPOINTS = {
   causal: "/api/causal/ate",
   uplift: "/api/uplift",
+  drift: "/api/drift",
 };
 
 function MetricCard({ label, value, detail }) {
@@ -18,9 +19,115 @@ function MetricCard({ label, value, detail }) {
   );
 }
 
+function DriftMonitoring({ report }) {
+  const isDriftDetected = report.drift_detected;
+
+  return (
+    <section className="analytics-drift-section">
+      <div className="analytics-drift-heading">
+        <div>
+          <span className="analytics-eyebrow">DATA QUALITY MONITORING</span>
+          <h2>Data Drift Monitoring</h2>
+          <p>
+            Statistical comparison of reference and current feature
+            distributions.
+          </p>
+        </div>
+
+        <span
+          className={`analytics-drift-status ${
+            isDriftDetected ? "drift-warning" : "drift-stable"
+          }`}
+          role="status"
+        >
+          {isDriftDetected ? "Drift Detected" : "Stable"}
+        </span>
+      </div>
+
+      <div className="analytics-drift-metrics">
+        <MetricCard
+          label="Reference records"
+          value={report.reference_rows.toLocaleString()}
+          detail="Training dataset"
+        />
+
+        <MetricCard
+          label="Current records"
+          value={report.current_rows.toLocaleString()}
+          detail="Current comparison dataset"
+        />
+
+        <MetricCard
+          label="Features monitored"
+          value={report.total_features}
+          detail="Numeric and categorical"
+        />
+
+        <MetricCard
+          label="Drifted features"
+          value={report.drifted_feature_count}
+          detail={`Significance threshold: ${report.threshold}`}
+        />
+      </div>
+
+      <div
+        className={`analytics-drift-message ${
+          isDriftDetected ? "drift-message-warning" : "drift-message-stable"
+        }`}
+      >
+        <strong>
+          {isDriftDetected
+            ? "Feature distribution changes detected."
+            : "No statistically significant feature drift detected."}
+        </strong>
+        <p>{report.interpretation}</p>
+      </div>
+
+      <div className="analytics-drift-table-wrapper">
+        <table className="analytics-drift-table">
+          <thead>
+            <tr>
+              <th>Feature</th>
+              <th>Test method</th>
+              <th>p-value</th>
+              <th>Drift status</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            {Object.entries(report.features).map(([feature, result]) => (
+              <tr key={feature}>
+                <td>{feature}</td>
+                <td>{result.method}</td>
+                <td>{result.p_value.toFixed(4)}</td>
+                <td>
+                  <span
+                    className={`analytics-feature-status ${
+                      result.drift_detected
+                        ? "drift-warning"
+                        : "drift-stable"
+                    }`}
+                  >
+                    {result.drift_detected ? "Detected" : "Stable"}
+                  </span>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <p className="analytics-chart-note">
+        {report.limitation}
+      </p>
+    </section>
+  );
+}
+
 export default function AnalyticsDashboard() {
   const [causal, setCausal] = useState(null);
   const [uplift, setUplift] = useState(null);
+  const [drift, setDrift] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
@@ -46,12 +153,13 @@ export default function AnalyticsDashboard() {
           );
         }
 
-        const [causalData, upliftData] = await Promise.all(
+        const [causalData, upliftData, driftData] = await Promise.all(
           responses.map((response) => response.json())
         );
 
         setCausal(causalData);
         setUplift(upliftData);
+        setDrift(driftData);
       } catch (err) {
         if (err.name !== "AbortError") {
           setError(
@@ -94,12 +202,12 @@ export default function AnalyticsDashboard() {
     );
   }
 
-  if (!causal || !uplift) {
+  if (!causal || !uplift || !drift) {
     return (
       <section className="analytics-page">
         <div className="analytics-state">
           <h2>No analytics available</h2>
-          <p>The API did not return the required analytics reports.</p>
+          <p>The API did not return all required analytics reports.</p>
         </div>
       </section>
     );
@@ -150,6 +258,8 @@ export default function AnalyticsDashboard() {
           detail={`${uplift.treatment_rows} treated · ${uplift.control_rows} control`}
         />
       </div>
+
+      <DriftMonitoring report={drift} />
 
       <div className="analytics-chart-grid">
         <article className="analytics-chart-card">
