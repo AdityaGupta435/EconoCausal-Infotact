@@ -6,12 +6,15 @@
 .app-layout {
   display: flex;
   min-height: 100vh;
-  background: #f7f9f7;
+  background:
+    radial-gradient(ellipse at 85% 0%, #e8edff70, transparent 35%),
+    #f4f7fc;
 }
 
 .main-content {
   flex: 1;
   min-width: 0;
+  padding-bottom: 35px;
 }
 
 .dashboard-placeholder {
@@ -22,9 +25,9 @@
   align-items: center;
   justify-content: center;
   padding: 30px;
-  border: 1px dashed #d7e2d9;
-  border-radius: 14px;
-  background: #ffffff;
+  border: 1px dashed #cddcff;
+  border-radius: 20px;
+  background: #fff;
   text-align: center;
 }
 
@@ -33,87 +36,39 @@
   height: 48px;
   display: grid;
   place-items: center;
-  border-radius: 13px;
-  background: #eaf5ed;
-  color: #16784b;
+  border-radius: 15px;
+  background: #edf3ff;
+  color: #286cff;
   font-size: 27px;
 }
 
 .dashboard-placeholder h2 {
   margin: 19px 0 8px;
-  color: #25392c;
-  font-size: 19px;
+  color: #14203f;
+  font-size: 22px;
+  letter-spacing: -0.7px;
 }
 
 .dashboard-placeholder p {
   max-width: 400px;
-  color: #7e8c82;
-  font-size: 13px;
+  color: #7383a1;
+  font-size: 14px;
   line-height: 1.7;
 }
 
 .placeholder-status {
   margin-top: 10px;
-  padding: 7px 11px;
-  border-radius: 6px;
-  background: #eaf5ed;
-  color: #16784b;
+  padding: 8px 12px;
+  border-radius: 9px;
+  background: #eaf3ff;
+  color: #2468ee;
   font-size: 11px;
-  font-weight: 600;
+  font-weight: 650;
 }
 
-@media (max-width: 760px) {
-  .sidebar {
-    width: 72px;
-    min-width: 72px;
-    padding: 20px 8px;
-  }
-
-  .sidebar-brand {
-    justify-content: center;
-    padding: 0 0 30px;
-  }
-
-  .sidebar-brand > div:last-child,
-  .sidebar-section-label,
-  .sidebar-link span:last-child,
-  .sidebar-bottom > div:last-child {
-    display: none;
-  }
-
-  .sidebar-link {
-    justify-content: center;
-    padding: 12px 5px;
-  }
-
-  .sidebar-bottom {
-    justify-content: center;
-    padding: 15px 0 0;
-  }
-
-  .dashboard-header {
-    align-items: flex-start;
-    padding: 22px 17px;
-  }
-
-  .header-heading h1 {
-    font-size: 23px;
-  }
-
-  .header-heading p {
-    font-size: 12px;
-  }
-
-  .header-actions {
-    gap: 8px;
-  }
-
-  .header-demo-badge {
-    font-size: 8px;
-  }
-
+@media (max-width: 700px) {
   .dashboard-placeholder {
-    margin: 18px 12px;
+    margin: 15px 10px;
     padding: 20px;
   }
 }

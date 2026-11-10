@@ -1,0 +1,53 @@
+{
+  "model_name": "hist_gradient_boosting",
+  "target": "revenue",
+  "task_type": "regression",
+  "version": "v1.0.0",
+  "created_at": "2026-11-05T10:34:46.197554+00:00",
+  "artifact_path": "D:\\EconoCausal\\models\\artifacts\\hist_gradient_boosting_revenue_v1.0.0.joblib",
+  "feature_schema": {
+    "input_features": [
+      "category",
+      "baseline_price",
+      "customer_history",
+      "seasonality",
+      "treatment",
+      "discount_pct"
+    ],
+    "categorical_features": [
+      "category"
+    ],
+    "numeric_features": [
+      "baseline_price",
+      "customer_history",
+      "seasonality",
+      "treatment",
+      "discount_pct"
+    ]
+  },
+  "metadata": {
+    "train_record_count": 6000,
+    "validation_record_count": 2000,
+    "test_record_count": 2000,
+    "best_params": {
+      "max_leaf_nodes": 15,
+      "learning_rate": 0.05,
+      "l2_regularization": 0.0
+    },
+    "validation_metrics": {
+      "mae": 26.1101991768115,
+      "rmse": 40.347411408218214,
+      "r2": 0.12225020311330115
+    },
+    "baseline_validation_metrics": {
+      "mae": 27.070862063333337,
+      "rmse": 43.083066683246265,
+      "r2": -0.0008122269915553648
+    },
+    "final_test_metrics": {
+      "mae": 26.14261348079876,
+      "rmse": 39.871776797118855,
+      "r2": 0.1323474837224229
+    }
+  }
+}

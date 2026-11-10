@@ -6,7 +6,7 @@ import pandas as pd
 from sklearn.base import clone
 from sklearn.model_selection import KFold
 
-from causal_model import (
+from backend.causal_model import (
     FEATURES,
     make_outcome_model,
     make_treatment_model,

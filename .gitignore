@@ -3,6 +3,7 @@ __pycache__/
 *.py[cod]
 .venv/
 .pytest_cache/
+.pytest_temp/
 
 # Node
 node_modules/
@@ -33,3 +34,13 @@ data/synthetic/eda_report.txt
 # Real-world dataset files (keep large data out of Git)
 data/real/raw/
 data/real/processed/criteo_sample.csv
+
+# Allow example environment files
+!.env.example
+!backend/.env.example
+
+data/uploads/
+
+models/artifacts/backup_*/
+
+models/artifacts/backup_*/

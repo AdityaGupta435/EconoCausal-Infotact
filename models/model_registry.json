@@ -1,0 +1,16 @@
+{
+  "version": "v1.0.0",
+  "last_updated": "2026-11-05T10:34:46.563444+00:00",
+  "models": {
+    "purchase_classifier": {
+      "artifact": "D:\\EconoCausal\\models\\artifacts\\hist_gradient_boosting_purchase_v1.0.0.joblib",
+      "test_roc_auc": 0.5831003631721764,
+      "test_pr_auc": 0.3421821675791913
+    },
+    "revenue_regressor": {
+      "artifact": "D:\\EconoCausal\\models\\artifacts\\hist_gradient_boosting_revenue_v1.0.0.joblib",
+      "test_rmse": 39.871776797118855,
+      "test_r2": 0.1323474837224229
+    }
+  }
+}

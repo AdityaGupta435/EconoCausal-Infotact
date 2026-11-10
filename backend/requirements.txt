@@ -3,8 +3,16 @@ uvicorn
 numpy
 pandas
 scikit-learn
+scipy
 pytest
 econml==0.17.0
 dowhy==0.8
 networkx==2.8.8
 python-multipart
+httpx
+pytest-asyncio
+pymongo
+bcrypt
+pyjwt
+python-dotenv
+mongomock

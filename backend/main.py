@@ -1,11 +1,11 @@
-
+import io
+import logging
+from contextlib import asynccontextmanager
 from pathlib import Path
 
 import numpy as np
 import pandas as pd
-import csv
-import io
-from fastapi import FastAPI, HTTPException,File,UploadFile
+from fastapi import FastAPI, File, HTTPException, UploadFile
 from pydantic import BaseModel, Field
 
 from backend.causal_model import DATA_DIR, estimate_ate
@@ -14,24 +14,48 @@ from backend.optimization import (
     build_optimization_problem,
     solve_optimization_problem,
 )
+from backend.database import get_db, init_db_indexes, close_db_connection
+from backend.api_v1 import router as api_v1_router
 
+logger = logging.getLogger("econocausal.main")
 
 ROOT = Path(__file__).resolve().parents[1]
 UPLIFT_REPORT = ROOT / "data" / "synthetic" / "uplift_evaluation.json"
+
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    """Application lifecycle management for database connections and indexing."""
+    try:
+        db = get_db()
+        if db is not None:
+            init_db_indexes(db)
+            logger.info("MongoDB initialized and indexes verified on startup.")
+        else:
+            logger.info("Operating without active MongoDB connection.")
+    except Exception as exc:
+        logger.warning("Could not initialize database on startup: %s", str(exc))
+
+    yield
+
+    close_db_connection()
+
 
 app = FastAPI(
     title="EconoCausal API",
     description="Causal inference for dynamic pricing",
     version="0.1.0",
+    lifespan=lifespan,
 )
 
+# Mount Phase 8 Authentication, Authorization, Database and Persistence API routes
+app.include_router(api_v1_router, prefix="/api")
 
 
 class OptimizationCandidate(BaseModel):
     customer_id: str = Field(min_length=1, max_length=100)
     baseline_price: float = Field(gt=0)
     predicted_ite: float
-
 
 
 class OptimizationRequest(BaseModel):
@@ -52,7 +76,6 @@ def home():
 @app.get("/health")
 def health():
     return {"status": "healthy"}
-
 
 
 @app.get("/api/drift")
@@ -87,7 +110,6 @@ def get_drift_report():
             status_code=500,
             detail=f"Drift monitoring failed: {str(error)}",
         ) from error
-
 
 
 @app.get("/api/causal/ate")
@@ -151,7 +173,6 @@ def uplift_evaluation():
             status_code=500,
             detail=f"Could not read uplift report: {exc}",
         ) from exc
-
 
 
 @app.post("/api/optimization")
@@ -247,7 +268,6 @@ def optimize_promotions(request: OptimizationRequest):
             status_code=500,
             detail=f"Optimization failed: {exc}",
         ) from exc
-
 
 
 @app.post("/api/data/upload")

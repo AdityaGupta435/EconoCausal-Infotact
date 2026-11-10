@@ -1,0 +1,65 @@
+{
+  "model_name": "hist_gradient_boosting",
+  "target": "purchase",
+  "task_type": "classification",
+  "version": "v1.0.0",
+  "created_at": "2026-11-05T10:34:23.654999+00:00",
+  "artifact_path": "D:\\EconoCausal\\models\\artifacts\\hist_gradient_boosting_purchase_v1.0.0.joblib",
+  "feature_schema": {
+    "input_features": [
+      "category",
+      "baseline_price",
+      "customer_history",
+      "seasonality",
+      "treatment",
+      "discount_pct"
+    ],
+    "categorical_features": [
+      "category"
+    ],
+    "numeric_features": [
+      "baseline_price",
+      "customer_history",
+      "seasonality",
+      "treatment",
+      "discount_pct"
+    ]
+  },
+  "metadata": {
+    "train_record_count": 6000,
+    "validation_record_count": 2000,
+    "test_record_count": 2000,
+    "best_params": {
+      "max_leaf_nodes": 15,
+      "learning_rate": 0.05,
+      "l2_regularization": 0.0
+    },
+    "validation_metrics": {
+      "accuracy": 0.7085,
+      "precision": 0.515625,
+      "recall": 0.05641025641025641,
+      "f1": 0.1016949152542373,
+      "roc_auc": 0.6316323880281478,
+      "pr_auc": 0.4091548234663215,
+      "brier_score": 0.19835339988126743
+    },
+    "baseline_validation_metrics": {
+      "accuracy": 0.7075,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "roc_auc": 0.5,
+      "pr_auc": 0.2925,
+      "brier_score": 0.20695844444444447
+    },
+    "final_test_metrics": {
+      "accuracy": 0.715,
+      "precision": 0.39344262295081966,
+      "recall": 0.04308797127468582,
+      "f1": 0.07766990291262135,
+      "roc_auc": 0.5831003631721764,
+      "pr_auc": 0.3421821675791913,
+      "brier_score": 0.19864088236478245
+    }
+  }
+}

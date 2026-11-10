@@ -1,0 +1,294 @@
+{
+  "evaluation": "Phase 6 Dynamic Pricing & Price Elasticity Engine",
+  "timestamp": "2026-11-05T05:12:11.947462+00:00",
+  "execution_summary": {
+    "total_elapsed_seconds": 62.697,
+    "stage_timings_seconds": {
+      "data_loading": 0.1,
+      "price_elasticity_modeling": 50.758,
+      "demand_model_training_and_eval": 3.981,
+      "transaction_recommendations_generation": 2.694,
+      "customer_aggregation": 4.298,
+      "total_pipeline": 62.697
+    },
+    "within_timeout": true,
+    "configured_timeout_seconds": 180.0
+  },
+  "train_rows": 6000,
+  "validation_rows": 2000,
+  "test_rows": 2000,
+  "unique_test_customers": 400,
+  "transactions_per_customer": 5,
+  "business_constraints": {
+    "min_price": 5.0,
+    "max_price": 500.0,
+    "max_price_change_pct": 0.2,
+    "profit_policy": "Profit optimization was not executed because unit cost/margin data is absent in observed data. Revenue maximization applied."
+  },
+  "elasticity_results": {
+    "overall": {
+      "observational": {
+        "model_type": "observational_ols",
+        "category": null,
+        "elasticity": -0.0797,
+        "standard_error": 0.0289,
+        "ci_lower": -0.1364,
+        "ci_upper": -0.023,
+        "p_value": 0.0059,
+        "sample_size": 6000,
+        "is_causally_identified": false,
+        "identification_assumption": "None (Naive correlation). Subject to omitted variable and selection bias.",
+        "caveat": "Reflects cross-sectional price-demand correlation. Does not isolate causal price changes."
+      },
+      "adjusted": {
+        "model_type": "confounder_adjusted_ols",
+        "category": null,
+        "elasticity": -0.054,
+        "standard_error": 0.0288,
+        "ci_lower": -0.1104,
+        "ci_upper": 0.0024,
+        "p_value": 0.0606,
+        "sample_size": 6000,
+        "is_causally_identified": true,
+        "identification_assumption": "Conditional unconfoundedness given customer history, seasonality, category, and promotion assignment.",
+        "caveat": "Identified conditional on observed covariates. Does not account for unobserved product quality or cross-product brand substitution."
+      },
+      "causal_dml": {
+        "model_type": "causal_dml",
+        "category": null,
+        "elasticity": -0.0529,
+        "standard_error": 0.0289,
+        "ci_lower": -0.1096,
+        "ci_upper": 0.0038,
+        "p_value": 0.0674,
+        "sample_size": 6000,
+        "is_causally_identified": true,
+        "identification_assumption": "Double Machine Learning Neyman-orthogonal residualization assuming unconfoundedness given W.",
+        "caveat": "Isolates pricing variation orthogonal to customer history, seasonality, and promotional assignment."
+      }
+    },
+    "by_category": {
+      "Beauty": {
+        "observational": {
+          "model_type": "observational_ols",
+          "category": "Beauty",
+          "elasticity": -0.0903,
+          "standard_error": 0.0603,
+          "ci_lower": -0.2085,
+          "ci_upper": 0.0279,
+          "p_value": 0.1346,
+          "sample_size": 1198,
+          "is_causally_identified": false,
+          "identification_assumption": "None (Naive correlation). Subject to omitted variable and selection bias.",
+          "caveat": "Reflects cross-sectional price-demand correlation. Does not isolate causal price changes."
+        },
+        "adjusted": {
+          "model_type": "confounder_adjusted_ols",
+          "category": "Beauty",
+          "elasticity": -0.0823,
+          "standard_error": 0.0611,
+          "ci_lower": -0.2021,
+          "ci_upper": 0.0374,
+          "p_value": 0.1781,
+          "sample_size": 1198,
+          "is_causally_identified": true,
+          "identification_assumption": "Conditional unconfoundedness given customer history, seasonality, category, and promotion assignment.",
+          "caveat": "Identified conditional on observed covariates. Does not account for unobserved product quality or cross-product brand substitution."
+        },
+        "causal_dml": {
+          "model_type": "causal_dml",
+          "category": "Beauty",
+          "elasticity": -0.0689,
+          "standard_error": 0.0609,
+          "ci_lower": -0.1883,
+          "ci_upper": 0.0505,
+          "p_value": 0.2582,
+          "sample_size": 1198,
+          "is_causally_identified": true,
+          "identification_assumption": "Double Machine Learning Neyman-orthogonal residualization assuming unconfoundedness given W.",
+          "caveat": "Isolates pricing variation orthogonal to customer history, seasonality, and promotional assignment."
+        }
+      },
+      "Electronics": {
+        "observational": {
+          "model_type": "observational_ols",
+          "category": "Electronics",
+          "elasticity": -0.0479,
+          "standard_error": 0.0714,
+          "ci_lower": -0.1878,
+          "ci_upper": 0.092,
+          "p_value": 0.5024,
+          "sample_size": 1187,
+          "is_causally_identified": false,
+          "identification_assumption": "None (Naive correlation). Subject to omitted variable and selection bias.",
+          "caveat": "Reflects cross-sectional price-demand correlation. Does not isolate causal price changes."
+        },
+        "adjusted": {
+          "model_type": "confounder_adjusted_ols",
+          "category": "Electronics",
+          "elasticity": -0.0295,
+          "standard_error": 0.0707,
+          "ci_lower": -0.1682,
+          "ci_upper": 0.1091,
+          "p_value": 0.6765,
+          "sample_size": 1187,
+          "is_causally_identified": true,
+          "identification_assumption": "Conditional unconfoundedness given customer history, seasonality, category, and promotion assignment.",
+          "caveat": "Identified conditional on observed covariates. Does not account for unobserved product quality or cross-product brand substitution."
+        },
+        "causal_dml": {
+          "model_type": "causal_dml",
+          "category": "Electronics",
+          "elasticity": -0.0214,
+          "standard_error": 0.0708,
+          "ci_lower": -0.1602,
+          "ci_upper": 0.1173,
+          "p_value": 0.762,
+          "sample_size": 1187,
+          "is_causally_identified": true,
+          "identification_assumption": "Double Machine Learning Neyman-orthogonal residualization assuming unconfoundedness given W.",
+          "caveat": "Isolates pricing variation orthogonal to customer history, seasonality, and promotional assignment."
+        }
+      },
+      "Fashion": {
+        "observational": {
+          "model_type": "observational_ols",
+          "category": "Fashion",
+          "elasticity": -0.0849,
+          "standard_error": 0.0485,
+          "ci_lower": -0.1801,
+          "ci_upper": 0.0102,
+          "p_value": 0.0804,
+          "sample_size": 2079,
+          "is_causally_identified": false,
+          "identification_assumption": "None (Naive correlation). Subject to omitted variable and selection bias.",
+          "caveat": "Reflects cross-sectional price-demand correlation. Does not isolate causal price changes."
+        },
+        "adjusted": {
+          "model_type": "confounder_adjusted_ols",
+          "category": "Fashion",
+          "elasticity": -0.0598,
+          "standard_error": 0.048,
+          "ci_lower": -0.1539,
+          "ci_upper": 0.0344,
+          "p_value": 0.2135,
+          "sample_size": 2079,
+          "is_causally_identified": true,
+          "identification_assumption": "Conditional unconfoundedness given customer history, seasonality, category, and promotion assignment.",
+          "caveat": "Identified conditional on observed covariates. Does not account for unobserved product quality or cross-product brand substitution."
+        },
+        "causal_dml": {
+          "model_type": "causal_dml",
+          "category": "Fashion",
+          "elasticity": -0.0414,
+          "standard_error": 0.0475,
+          "ci_lower": -0.1344,
+          "ci_upper": 0.0517,
+          "p_value": 0.3837,
+          "sample_size": 2079,
+          "is_causally_identified": true,
+          "identification_assumption": "Double Machine Learning Neyman-orthogonal residualization assuming unconfoundedness given W.",
+          "caveat": "Isolates pricing variation orthogonal to customer history, seasonality, and promotional assignment."
+        }
+      },
+      "Home": {
+        "observational": {
+          "model_type": "observational_ols",
+          "category": "Home",
+          "elasticity": -0.0703,
+          "standard_error": 0.058,
+          "ci_lower": -0.184,
+          "ci_upper": 0.0435,
+          "p_value": 0.2263,
+          "sample_size": 1536,
+          "is_causally_identified": false,
+          "identification_assumption": "None (Naive correlation). Subject to omitted variable and selection bias.",
+          "caveat": "Reflects cross-sectional price-demand correlation. Does not isolate causal price changes."
+        },
+        "adjusted": {
+          "model_type": "confounder_adjusted_ols",
+          "category": "Home",
+          "elasticity": -0.0511,
+          "standard_error": 0.0577,
+          "ci_lower": -0.1642,
+          "ci_upper": 0.0619,
+          "p_value": 0.3754,
+          "sample_size": 1536,
+          "is_causally_identified": true,
+          "identification_assumption": "Conditional unconfoundedness given customer history, seasonality, category, and promotion assignment.",
+          "caveat": "Identified conditional on observed covariates. Does not account for unobserved product quality or cross-product brand substitution."
+        },
+        "causal_dml": {
+          "model_type": "causal_dml",
+          "category": "Home",
+          "elasticity": -0.0714,
+          "standard_error": 0.0572,
+          "ci_lower": -0.1835,
+          "ci_upper": 0.0407,
+          "p_value": 0.2118,
+          "sample_size": 1536,
+          "is_causally_identified": true,
+          "identification_assumption": "Double Machine Learning Neyman-orthogonal residualization assuming unconfoundedness given W.",
+          "caveat": "Isolates pricing variation orthogonal to customer history, seasonality, and promotional assignment."
+        }
+      }
+    }
+  },
+  "demand_model_performance": {
+    "validation_brier_score": 0.1995,
+    "validation_mae": 0.393,
+    "validation_rmse": 0.4467,
+    "test_brier_score": 0.1987,
+    "test_mae": 0.3945,
+    "test_rmse": 0.4458,
+    "ground_truth_test_mae": 0.0481,
+    "ground_truth_test_rmse": 0.0624
+  },
+  "recommendation_summary": {
+    "transaction_count": 2000,
+    "unique_customers": 400,
+    "mean_recommended_price_change_pct": 0.1115,
+    "total_current_expected_revenue": 39743.55,
+    "total_recommended_expected_revenue": 52041.49,
+    "total_incremental_revenue": 12297.93,
+    "revenue_uplift_pct": 0.3094,
+    "extrapolation_recommendation_count": 44,
+    "extrapolation_rate": 0.022
+  },
+  "customer_segment_pricing_summary": [
+    {
+      "uplift_segment": "Lost Causes",
+      "customer_count": 54,
+      "mean_price_shift": 0.1082,
+      "total_inc_revenue": 1706.67,
+      "mean_elasticity": 0.17808148148148148
+    },
+    {
+      "uplift_segment": "Persuadables",
+      "customer_count": 274,
+      "mean_price_shift": 0.11261788321167883,
+      "total_inc_revenue": 8492.28,
+      "mean_elasticity": 0.734708394160584
+    },
+    {
+      "uplift_segment": "Sleeping Dogs",
+      "customer_count": 5,
+      "mean_price_shift": 0.12386,
+      "total_inc_revenue": 149.05,
+      "mean_elasticity": 0.92106
+    },
+    {
+      "uplift_segment": "Sure Things",
+      "customer_count": 67,
+      "mean_price_shift": 0.1087686567164179,
+      "total_inc_revenue": 1949.95,
+      "mean_elasticity": 0.43085970149253733
+    }
+  ],
+  "artifact_paths": {
+    "model": "D:\\EconoCausal\\models\\artifacts\\pricing_demand_model.joblib",
+    "report": "D:\\EconoCausal\\data\\synthetic\\pricing_evaluation.json",
+    "transaction_recommendations": "D:\\EconoCausal\\data\\synthetic\\transaction_pricing_recommendations.csv",
+    "customer_recommendations": "D:\\EconoCausal\\data\\synthetic\\customer_pricing_recommendations.csv"
+  }
+}

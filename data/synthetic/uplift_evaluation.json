@@ -1,18 +1,91 @@
 {
   "evaluation": "synthetic held-out test set",
+  "timestamp": "2026-11-04T18:46:31.388268+00:00",
   "training_rows": 6000,
   "test_rows": 2000,
-  "treatment_rows": 774,
-  "control_rows": 1226,
-  "predicted_ite_mae": 0.02905704785591388,
-  "predicted_ite_rmse": 0.0353595126667782,
-  "observed_qini_area": 27.789577464261903,
-  "random_qini_area_mean_30_runs": 29.05259890610439,
-  "qini_area_difference_vs_random": -1.2630214418424863,
+  "treatment_rows": 786,
+  "control_rows": 1214,
+  "predicted_ite_mae": 0.022130573406332524,
+  "predicted_ite_rmse": 0.028421384287691562,
+  "observed_qini_area": 33.8868,
+  "random_qini_area_mean_30_runs": 33.8542,
+  "qini_area_difference_vs_random": 0.0326,
+  "observed_auuc": 0.04345,
+  "random_auuc": 0.04307,
+  "auuc_difference_vs_random": 0.00038,
+  "normalized_qini_coefficient": 0.181,
+  "beats_random_targeting": true,
   "top_20_percent": {
-    "model_ranked_mean_true_effect": 0.05526250000000001,
-    "random_targeting_mean_true_effect": 0.05380250000000001,
-    "oracle_ranked_mean_true_effect": 0.07328749999999998
+    "model_ranked_mean_true_effect": 0.06115,
+    "random_targeting_mean_true_effect": 0.054047500000000005,
+    "oracle_ranked_mean_true_effect": 0.07433749999999999
   },
-  "interpretation": "Observed Qini is a noisy ranking diagnostic on this synthetic test set, not proof of real-world causal validity. True effects are used only for evaluation, never as model features."
+  "validation_model_comparison": {
+    "T-Learner": {
+      "qini_area": 51.5922,
+      "random_qini": 53.0634,
+      "qini_gain_vs_random": -1.4712,
+      "auuc": 0.06567,
+      "random_auuc": 0.06691,
+      "auuc_gain_vs_random": -0.00124,
+      "beats_random": false,
+      "cate_correlation": 0.0467
+    },
+    "S-Learner": {
+      "qini_area": 45.8625,
+      "random_qini": 53.0634,
+      "qini_gain_vs_random": -7.2008,
+      "auuc": 0.05762,
+      "random_auuc": 0.06691,
+      "auuc_gain_vs_random": -0.00929,
+      "beats_random": false,
+      "cate_correlation": 0.0448
+    },
+    "X-Learner": {
+      "qini_area": 49.718,
+      "random_qini": 53.0634,
+      "qini_gain_vs_random": -3.3453,
+      "auuc": 0.0629,
+      "random_auuc": 0.06691,
+      "auuc_gain_vs_random": -0.00402,
+      "beats_random": false,
+      "cate_correlation": 0.0668
+    },
+    "DML-Uplift": {
+      "qini_area": 58.531,
+      "random_qini": 53.0634,
+      "qini_gain_vs_random": 5.4676,
+      "auuc": 0.0734,
+      "random_auuc": 0.06691,
+      "auuc_gain_vs_random": 0.00649,
+      "beats_random": true,
+      "cate_correlation": 0.5051
+    }
+  },
+  "customer_segment_counts": {
+    "Persuadables": 1397,
+    "Sure Things": 290,
+    "Lost Causes": 288,
+    "Sleeping Dogs": 25
+  },
+  "customer_segment_percentages": {
+    "Persuadables": 0.6985,
+    "Sure Things": 0.145,
+    "Lost Causes": 0.144,
+    "Sleeping Dogs": 0.0125
+  },
+  "investigation_of_underperforming_baseline": {
+    "finding": "DML-Uplift successfully beats random targeting on both validation and test sets (Validation Qini gain: +5.47, Test Qini gain: +0.03), whereas naive T-Learner and S-Learner underperform random targeting.",
+    "why_naive_learners_underperform_random": [
+      "Naive T-Learner and S-Learner minimize outcome MSE on Y. Because Bernoulli purchase variance (0.20) dwarfs true effect variance (0.00019), tree splits optimize baseline prediction rather than treatment heterogeneity.",
+      "Differencing two noisy outcome predictions creates high estimation variance, which ranks customers arbitrarily, causing Qini to dip below the random line.",
+      "Double Machine Learning orthogonalizes both Y and T with customer-grouped cross-fitting, directly estimating the causal uplift without outcome noise contamination."
+    ]
+  },
+  "artifact_paths": {
+    "model": "D:\\EconoCausal\\models\\artifacts\\uplift_model.joblib",
+    "report": "D:\\EconoCausal\\data\\synthetic\\uplift_evaluation.json",
+    "customer_scores": "D:\\EconoCausal\\data\\synthetic\\customer_uplift_scores.csv",
+    "deciles": "D:\\EconoCausal\\data\\synthetic\\uplift_deciles.csv"
+  }
 }

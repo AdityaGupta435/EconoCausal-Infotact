@@ -1,17 +1,30 @@
-
+import { useAuth } from "../../context/AuthContext";
 import "./Sidebar.css";
 
-const navigation = [
-  { icon: "⌂", label: "Overview" },
-  { icon: "▥", label: "Pricing Analysis" },
-  { icon: "♧", label: "Causal Effects" },
-  { icon: "↗", label: "Uplift Analysis" },
-  { icon: "◎", label: "Budget Optimizer" },
-  { icon: "▤", label: "Data Management" },
-  { icon: "⚙", label: "Settings" },
+const navigationItems = [
+  { icon: "⌂", label: "Overview",      roles: ["admin", "analyst", "viewer"], group: "WORKSPACE" },
+  { icon: "▤", label: "Causal Effects", roles: ["admin", "analyst", "viewer"], group: "ANALYTICS" },
+  { icon: "↗", label: "Uplift Analysis",roles: ["admin", "analyst", "viewer"], group: "ANALYTICS" },
+  { icon: "▥", label: "Pricing",        roles: ["admin", "analyst", "viewer"], group: "ANALYTICS" },
+  { icon: "◎", label: "Promotions",     roles: ["admin", "analyst"],           group: "ANALYTICS" },
+  { icon: "▤", label: "Datasets",       roles: ["admin", "analyst"],           group: "PLATFORM" },
+  { icon: "⟳", label: "Training",       roles: ["admin", "analyst"],           group: "PLATFORM" },
+  { icon: "⚙", label: "Settings",       roles: ["admin", "analyst", "viewer"], group: "PLATFORM" },
 ];
 
 export default function Sidebar({ activePage, onNavigate }) {
+  const { role } = useAuth();
+  const currentRole = (role || "viewer").toLowerCase();
+
+  const allowed = navigationItems.filter(item => item.roles.includes(currentRole));
+
+  // Group items
+  const groups = ["WORKSPACE", "ANALYTICS", "PLATFORM"];
+  const grouped = groups.reduce((acc, g) => {
+    acc[g] = allowed.filter(i => i.group === g);
+    return acc;
+  }, {});
+
   return (
     <aside className="sidebar">
       <div className="sidebar-brand">
@@ -34,45 +47,38 @@ export default function Sidebar({ activePage, onNavigate }) {
         </div>
       </div>
 
-      <div className="sidebar-section-label">WORKSPACE</div>
-
       <nav className="sidebar-navigation" aria-label="Main navigation">
-        {navigation.map((item) => {
-          const isActive = item.label === activePage;
-
+        {groups.map((group) => {
+          const items = grouped[group];
+          if (!items || items.length === 0) return null;
           return (
-            <button
-              key={item.label}
-              type="button"
-              className={`sidebar-link ${isActive ? "active" : ""}`}
-              aria-current={isActive ? "page" : undefined}
-              onClick={() => onNavigate(item.label)}
-            >
-              <span className="sidebar-link-icon" aria-hidden="true">
-                {item.icon}
-              </span>
-              <span>{item.label}</span>
-            </button>
+            <div key={group}>
+              <div className="sidebar-section-label">{group}</div>
+              {items.map((item) => {
+                const isActive = item.label === activePage;
+                return (
+                  <button
+                    key={item.label}
+                    type="button"
+                    className={`sidebar-link ${isActive ? "active" : ""}`}
+                    aria-current={isActive ? "page" : undefined}
+                    onClick={() => onNavigate(item.label)}
+                  >
+                    <span className="sidebar-link-icon" aria-hidden="true">{item.icon}</span>
+                    <span>{item.label}</span>
+                  </button>
+                );
+              })}
+            </div>
           );
         })}
       </nav>
-
-      <div className="sidebar-promo">
-        <div className="promo-chart" aria-hidden="true">
-          <svg viewBox="0 0 100 65">
-            <path d="M10 52 L32 34 L48 40 L76 12 L89 17" fill="none" stroke="#3478ff" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
-            <path d="M76 12 L89 17 L86 30" fill="none" stroke="#3478ff" strokeWidth="4" strokeLinecap="round" />
-          </svg>
-        </div>
-        <h3>Turn data into smarter pricing decisions</h3>
-        <p>Causal insights for real business impact.</p>
-      </div>
 
       <div className="sidebar-bottom">
         <span className="sidebar-status-dot" />
         <div>
           <strong>Analytics Engine</strong>
-          <span>Workspace ready</span>
+          <span>Role: {currentRole.toUpperCase()}</span>
         </div>
       </div>
     </aside>

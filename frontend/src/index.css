@@ -1,12 +1,16 @@
 
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;650;700;750;800&display=swap");
+
 :root {
-  font-family: Inter, "Segoe UI", Arial, sans-serif;
-  color: #25352c;
-  background: #f7f9f7;
+  font-family: "Inter", "Segoe UI", sans-serif;
+  color: #111c3b;
+  background: #f4f7fc;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-optical-sizing: auto;
+  font-weight: 400;
 }
 
 * {
@@ -19,6 +23,18 @@ body {
   min-height: 100vh;
 }
 
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
 button {
-  font-family: inherit;
+  -webkit-tap-highlight-color: transparent;
+}
+
+::selection {
+  color: #1247b8;
+  background: #dbe8ff;
 }

@@ -1,0 +1,513 @@
+{
+  "comparison_summary": [
+    {
+      "scenario_name": "1. Low Budget ($1,000)",
+      "budget": 1000.0,
+      "spend": 999.99,
+      "budget_utilization_pct": 1.0,
+      "targeted_customers": 348,
+      "targeting_rate": 0.87,
+      "expected_incremental_conversions": 27.8709,
+      "expected_incremental_revenue": 929.93,
+      "campaign_roi": 0.9299,
+      "persuadables_share": 0.7385,
+      "solver_status": "optimal"
+    },
+    {
+      "scenario_name": "2. Baseline Budget ($2,500)",
+      "budget": 2500.0,
+      "spend": 2068.67,
+      "budget_utilization_pct": 0.8275,
+      "targeted_customers": 393,
+      "targeting_rate": 0.9825,
+      "expected_incremental_conversions": 47.6482,
+      "expected_incremental_revenue": 1250.13,
+      "campaign_roi": 0.6043,
+      "persuadables_share": 0.6972,
+      "solver_status": "optimal"
+    },
+    {
+      "scenario_name": "3. High Budget ($5,000)",
+      "budget": 5000.0,
+      "spend": 2068.67,
+      "budget_utilization_pct": 0.4137,
+      "targeted_customers": 393,
+      "targeting_rate": 0.9825,
+      "expected_incremental_conversions": 47.6482,
+      "expected_incremental_revenue": 1250.13,
+      "campaign_roi": 0.6043,
+      "persuadables_share": 0.6972,
+      "solver_status": "optimal"
+    },
+    {
+      "scenario_name": "4. Shallow Discounts (5%, 10%)",
+      "budget": 2500.0,
+      "spend": 891.64,
+      "budget_utilization_pct": 0.3567,
+      "targeted_customers": 393,
+      "targeting_rate": 0.9825,
+      "expected_incremental_conversions": 24.1357,
+      "expected_incremental_revenue": 791.53,
+      "campaign_roi": 0.8877,
+      "persuadables_share": 0.6972,
+      "solver_status": "optimal"
+    },
+    {
+      "scenario_name": "5. Deep Discounts (15%, 20%)",
+      "budget": 2500.0,
+      "spend": 2070.34,
+      "budget_utilization_pct": 0.8281,
+      "targeted_customers": 387,
+      "targeting_rate": 0.9675,
+      "expected_incremental_conversions": 47.6655,
+      "expected_incremental_revenue": 1249.25,
+      "campaign_roi": 0.6034,
+      "persuadables_share": 0.7054,
+      "solver_status": "optimal"
+    },
+    {
+      "scenario_name": "6. Persuadables-Only Policy",
+      "budget": 2500.0,
+      "spend": 1497.68,
+      "budget_utilization_pct": 0.5991,
+      "targeted_customers": 274,
+      "targeting_rate": 0.685,
+      "expected_incremental_conversions": 35.4174,
+      "expected_incremental_revenue": 977.26,
+      "campaign_roi": 0.6525,
+      "persuadables_share": 1.0,
+      "solver_status": "optimal"
+    },
+    {
+      "scenario_name": "7. Uplift Conversions Objective",
+      "budget": 2500.0,
+      "spend": 2147.24,
+      "budget_utilization_pct": 0.8589,
+      "targeted_customers": 395,
+      "targeting_rate": 0.9875,
+      "expected_incremental_conversions": 48.5936,
+      "expected_incremental_revenue": 1242.7,
+      "campaign_roi": 0.5787,
+      "persuadables_share": 0.6937,
+      "solver_status": "optimal"
+    }
+  ],
+  "scenario_details": {
+    "1. Low Budget ($1,000)": {
+      "objective": "incremental_revenue",
+      "budget": 1000.0,
+      "total_spend": 999.99,
+      "unused_budget": 0.01,
+      "budget_utilization_pct": 1.0,
+      "total_customers": 400,
+      "targeted_customers": 348,
+      "targeting_rate": 0.87,
+      "total_expected_incremental_demand": 27.8709,
+      "total_expected_incremental_revenue": 929.93,
+      "total_expected_incremental_profit": null,
+      "campaign_roi": 0.9299,
+      "solver_status": "optimal",
+      "cost_model": "redemption",
+      "discount_distribution": {
+        "5.0%": 64,
+        "10.0%": 121,
+        "15.0%": 126,
+        "20.0%": 37,
+        "0% (No Promo)": 52
+      },
+      "segment_breakdown": {
+        "Persuadables": {
+          "total_customers": 274,
+          "targeted_customers": 257,
+          "spend": 801.6746353070004,
+          "incremental_revenue": 756.3179643729997,
+          "incremental_demand": 22.415745000000012
+        },
+        "Sure Things": {
+          "total_customers": 67,
+          "targeted_customers": 48,
+          "spend": 88.85570995549999,
+          "incremental_revenue": 72.40326553450001,
+          "incremental_demand": 2.4466020000000004
+        },
+        "Lost Causes": {
+          "total_customers": 54,
+          "targeted_customers": 43,
+          "spend": 109.46169980499997,
+          "incremental_revenue": 101.206589955,
+          "incremental_demand": 3.008503999999999
+        },
+        "Sleeping Dogs": {
+          "total_customers": 5,
+          "targeted_customers": 0,
+          "spend": 0.0,
+          "incremental_revenue": 0.0,
+          "incremental_demand": 0.0
+        },
+        "Unclassified": {
+          "total_customers": 0,
+          "targeted_customers": 0,
+          "spend": 0.0,
+          "incremental_revenue": 0.0,
+          "incremental_demand": 0.0
+        }
+      }
+    },
+    "2. Baseline Budget ($2,500)": {
+      "objective": "incremental_revenue",
+      "budget": 2500.0,
+      "total_spend": 2068.67,
+      "unused_budget": 431.33,
+      "budget_utilization_pct": 0.8275,
+      "total_customers": 400,
+      "targeted_customers": 393,
+      "targeting_rate": 0.9825,
+      "total_expected_incremental_demand": 47.6482,
+      "total_expected_incremental_revenue": 1250.13,
+      "total_expected_incremental_profit": null,
+      "campaign_roi": 0.6043,
+      "solver_status": "optimal",
+      "cost_model": "redemption",
+      "discount_distribution": {
+        "5.0%": 6,
+        "10.0%": 6,
+        "15.0%": 14,
+        "20.0%": 367,
+        "0% (No Promo)": 7
+      },
+      "segment_breakdown": {
+        "Persuadables": {
+          "total_customers": 274,
+          "targeted_customers": 274,
+          "spend": 1497.6818529479992,
+          "incremental_revenue": 977.2563665720002,
+          "incremental_demand": 35.41737700000004
+        },
+        "Sure Things": {
+          "total_customers": 67,
+          "targeted_customers": 66,
+          "spend": 314.0078564405,
+          "incremental_revenue": 130.4835892695001,
+          "incremental_demand": 6.630667000000002
+        },
+        "Lost Causes": {
+          "total_customers": 54,
+          "targeted_customers": 53,
+          "spend": 256.98237905649995,
+          "incremental_revenue": 142.3860443135001,
+          "incremental_demand": 5.600124
+        },
+        "Sleeping Dogs": {
+          "total_customers": 5,
+          "targeted_customers": 0,
+          "spend": 0.0,
+          "incremental_revenue": 0.0,
+          "incremental_demand": 0.0
+        },
+        "Unclassified": {
+          "total_customers": 0,
+          "targeted_customers": 0,
+          "spend": 0.0,
+          "incremental_revenue": 0.0,
+          "incremental_demand": 0.0
+        }
+      }
+    },
+    "3. High Budget ($5,000)": {
+      "objective": "incremental_revenue",
+      "budget": 5000.0,
+      "total_spend": 2068.67,
+      "unused_budget": 2931.33,
+      "budget_utilization_pct": 0.4137,
+      "total_customers": 400,
+      "targeted_customers": 393,
+      "targeting_rate": 0.9825,
+      "total_expected_incremental_demand": 47.6482,
+      "total_expected_incremental_revenue": 1250.13,
+      "total_expected_incremental_profit": null,
+      "campaign_roi": 0.6043,
+      "solver_status": "optimal",
+      "cost_model": "redemption",
+      "discount_distribution": {
+        "5.0%": 6,
+        "10.0%": 6,
+        "15.0%": 14,
+        "20.0%": 367,
+        "0% (No Promo)": 7
+      },
+      "segment_breakdown": {
+        "Persuadables": {
+          "total_customers": 274,
+          "targeted_customers": 274,
+          "spend": 1497.6818529479992,
+          "incremental_revenue": 977.2563665720002,
+          "incremental_demand": 35.41737700000004
+        },
+        "Sure Things": {
+          "total_customers": 67,
+          "targeted_customers": 66,
+          "spend": 314.0078564405,
+          "incremental_revenue": 130.4835892695001,
+          "incremental_demand": 6.630667000000002
+        },
+        "Lost Causes": {
+          "total_customers": 54,
+          "targeted_customers": 53,
+          "spend": 256.98237905649995,
+          "incremental_revenue": 142.3860443135001,
+          "incremental_demand": 5.600124
+        },
+        "Sleeping Dogs": {
+          "total_customers": 5,
+          "targeted_customers": 0,
+          "spend": 0.0,
+          "incremental_revenue": 0.0,
+          "incremental_demand": 0.0
+        },
+        "Unclassified": {
+          "total_customers": 0,
+          "targeted_customers": 0,
+          "spend": 0.0,
+          "incremental_revenue": 0.0,
+          "incremental_demand": 0.0
+        }
+      }
+    },
+    "4. Shallow Discounts (5%, 10%)": {
+      "objective": "incremental_revenue",
+      "budget": 2500.0,
+      "total_spend": 891.64,
+      "unused_budget": 1608.36,
+      "budget_utilization_pct": 0.3567,
+      "total_customers": 400,
+      "targeted_customers": 393,
+      "targeting_rate": 0.9825,
+      "total_expected_incremental_demand": 24.1357,
+      "total_expected_incremental_revenue": 791.53,
+      "total_expected_incremental_profit": null,
+      "campaign_roi": 0.8877,
+      "solver_status": "optimal",
+      "cost_model": "redemption",
+      "discount_distribution": {
+        "5.0%": 6,
+        "10.0%": 387,
+        "0% (No Promo)": 7
+      },
+      "segment_breakdown": {
+        "Persuadables": {
+          "total_customers": 274,
+          "targeted_customers": 274,
+          "spend": 631.401621045,
+          "incremental_revenue": 612.6817412949999,
+          "incremental_demand": 17.80876700000002
+        },
+        "Sure Things": {
+          "total_customers": 67,
+          "targeted_customers": 66,
+          "spend": 144.73093886450002,
+          "incremental_revenue": 87.57109498550005,
+          "incremental_demand": 3.4565609999999998
+        },
+        "Lost Causes": {
+          "total_customers": 54,
+          "targeted_customers": 53,
+          "spend": 115.50252036549999,
+          "incremental_revenue": 91.27730246449997,
+          "incremental_demand": 2.8703790000000002
+        },
+        "Sleeping Dogs": {
+          "total_customers": 5,
+          "targeted_customers": 0,
+          "spend": 0.0,
+          "incremental_revenue": 0.0,
+          "incremental_demand": 0.0
+        },
+        "Unclassified": {
+          "total_customers": 0,
+          "targeted_customers": 0,
+          "spend": 0.0,
+          "incremental_revenue": 0.0,
+          "incremental_demand": 0.0
+        }
+      }
+    },
+    "5. Deep Discounts (15%, 20%)": {
+      "objective": "incremental_revenue",
+      "budget": 2500.0,
+      "total_spend": 2070.34,
+      "unused_budget": 429.66,
+      "budget_utilization_pct": 0.8281,
+      "total_customers": 400,
+      "targeted_customers": 387,
+      "targeting_rate": 0.9675,
+      "total_expected_incremental_demand": 47.6655,
+      "total_expected_incremental_revenue": 1249.25,
+      "total_expected_incremental_profit": null,
+      "campaign_roi": 0.6034,
+      "solver_status": "optimal",
+      "cost_model": "redemption",
+      "discount_distribution": {
+        "15.0%": 20,
+        "20.0%": 367,
+        "0% (No Promo)": 13
+      },
+      "segment_breakdown": {
+        "Persuadables": {
+          "total_customers": 274,
+          "targeted_customers": 273,
+          "spend": 1497.6363614024992,
+          "incremental_revenue": 977.1159027875001,
+          "incremental_demand": 35.41220700000004
+        },
+        "Sure Things": {
+          "total_customers": 67,
+          "targeted_customers": 63,
+          "spend": 316.8445991974999,
+          "incremental_revenue": 130.10467147250012,
+          "incremental_demand": 6.662193000000001
+        },
+        "Lost Causes": {
+          "total_customers": 54,
+          "targeted_customers": 51,
+          "spend": 255.863483323,
+          "incremental_revenue": 142.0303211570001,
+          "incremental_demand": 5.591147000000001
+        },
+        "Sleeping Dogs": {
+          "total_customers": 5,
+          "targeted_customers": 0,
+          "spend": 0.0,
+          "incremental_revenue": 0.0,
+          "incremental_demand": 0.0
+        },
+        "Unclassified": {
+          "total_customers": 0,
+          "targeted_customers": 0,
+          "spend": 0.0,
+          "incremental_revenue": 0.0,
+          "incremental_demand": 0.0
+        }
+      }
+    },
+    "6. Persuadables-Only Policy": {
+      "objective": "incremental_revenue",
+      "budget": 2500.0,
+      "total_spend": 1497.68,
+      "unused_budget": 1002.32,
+      "budget_utilization_pct": 0.5991,
+      "total_customers": 400,
+      "targeted_customers": 274,
+      "targeting_rate": 0.685,
+      "total_expected_incremental_demand": 35.4174,
+      "total_expected_incremental_revenue": 977.26,
+      "total_expected_incremental_profit": null,
+      "campaign_roi": 0.6525,
+      "solver_status": "optimal",
+      "cost_model": "redemption",
+      "discount_distribution": {
+        "5.0%": 1,
+        "10.0%": 1,
+        "15.0%": 7,
+        "20.0%": 265,
+        "0% (No Promo)": 126
+      },
+      "segment_breakdown": {
+        "Persuadables": {
+          "total_customers": 274,
+          "targeted_customers": 274,
+          "spend": 1497.6818529479992,
+          "incremental_revenue": 977.2563665720002,
+          "incremental_demand": 35.41737700000004
+        },
+        "Sure Things": {
+          "total_customers": 67,
+          "targeted_customers": 0,
+          "spend": 0.0,
+          "incremental_revenue": 0.0,
+          "incremental_demand": 0.0
+        },
+        "Lost Causes": {
+          "total_customers": 54,
+          "targeted_customers": 0,
+          "spend": 0.0,
+          "incremental_revenue": 0.0,
+          "incremental_demand": 0.0
+        },
+        "Sleeping Dogs": {
+          "total_customers": 5,
+          "targeted_customers": 0,
+          "spend": 0.0,
+          "incremental_revenue": 0.0,
+          "incremental_demand": 0.0
+        },
+        "Unclassified": {
+          "total_customers": 0,
+          "targeted_customers": 0,
+          "spend": 0.0,
+          "incremental_revenue": 0.0,
+          "incremental_demand": 0.0
+        }
+      }
+    },
+    "7. Uplift Conversions Objective": {
+      "objective": "incremental_conversions",
+      "budget": 2500.0,
+      "total_spend": 2147.24,
+      "unused_budget": 352.76,
+      "budget_utilization_pct": 0.8589,
+      "total_customers": 400,
+      "targeted_customers": 395,
+      "targeting_rate": 0.9875,
+      "total_expected_incremental_demand": 48.5936,
+      "total_expected_incremental_revenue": 1242.7,
+      "total_expected_incremental_profit": null,
+      "campaign_roi": 0.5787,
+      "solver_status": "optimal",
+      "cost_model": "redemption",
+      "discount_distribution": {
+        "5.0%": 0,
+        "10.0%": 0,
+        "15.0%": 0,
+        "20.0%": 395,
+        "0% (No Promo)": 5
+      },
+      "segment_breakdown": {
+        "Persuadables": {
+          "total_customers": 274,
+          "targeted_customers": 274,
+          "spend": 1514.1728892679996,
+          "incremental_revenue": 976.3142620920003,
+          "incremental_demand": 35.66023600000004
+        },
+        "Sure Things": {
+          "total_customers": 67,
+          "targeted_customers": 67,
+          "spend": 347.2637248439999,
+          "incremental_revenue": 127.17097719600012,
+          "incremental_demand": 7.077504000000001
+        },
+        "Lost Causes": {
+          "total_customers": 54,
+          "targeted_customers": 54,
+          "spend": 285.804730264,
+          "incremental_revenue": 139.21785221600004,
+          "incremental_demand": 5.855815999999999
+        },
+        "Sleeping Dogs": {
+          "total_customers": 5,
+          "targeted_customers": 0,
+          "spend": 0.0,
+          "incremental_revenue": 0.0,
+          "incremental_demand": 0.0
+        },
+        "Unclassified": {
+          "total_customers": 0,
+          "targeted_customers": 0,
+          "spend": 0.0,
+          "incremental_revenue": 0.0,
+          "incremental_demand": 0.0
+        }
+      }
+    }
+  }
+}

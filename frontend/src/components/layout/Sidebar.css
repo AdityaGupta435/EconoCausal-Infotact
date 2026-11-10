@@ -1,110 +1,164 @@
 
 .sidebar {
-  width: 252px;
-  min-width: 252px;
+  width: 322px;
+  min-width: 322px;
   min-height: 100vh;
-  box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  padding: 27px 17px 20px;
-  background: #ffffff;
-  border-right: 1px solid #e8eee9;
-  color: #25352c;
+  padding: 30px 19px 20px;
+  background: linear-gradient(180deg, #fff 0%, #f7faff 100%);
+  border-right: 1px solid #e7edf8;
+  color: #101b3a;
 }
 
 .sidebar-brand {
   display: flex;
   align-items: center;
-  gap: 11px;
-  padding: 0 5px 34px;
+  gap: 12px;
+  padding: 0 15px 42px;
 }
 
-.brand-icon {
-  width: 42px;
-  height: 42px;
-  display: grid;
-  place-items: center;
-  border-radius: 12px;
-  background: #16784b;
-  color: #ffffff;
-  font-size: 24px;
+.brand-mark {
+  width: 58px;
+  height: 55px;
+  flex-shrink: 0;
+}
+
+.brand-mark svg {
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 5px 8px #477fff25);
+}
+
+.brand-copy h2 {
+  margin: 0;
+  font-size: 25px;
   font-weight: 800;
+  letter-spacing: -1.1px;
+  color: #101b3a;
 }
 
-.sidebar-brand h2 {
-  margin: 0 0 5px;
-  font-size: 18px;
-  letter-spacing: -0.6px;
+.brand-copy h2 span {
+  color: #2874f5;
 }
 
-.sidebar-brand span {
-  font-size: 9px;
-  letter-spacing: 1.1px;
-  color: #7b8b80;
+.brand-copy p {
+  margin: 5px 0 0;
+  color: #7c8aa8;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
 }
 
 .sidebar-section-label {
-  padding: 0 10px;
-  margin-bottom: 12px;
-  color: #92a096;
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 1.3px;
+  margin: 0 13px 14px;
+  color: #8592ac;
+  font-size: 11px;
+  font-weight: 750;
+  letter-spacing: 1.4px;
 }
 
 .sidebar-navigation {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 7px;
 }
 
 .sidebar-link {
   width: 100%;
+  min-height: 55px;
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 12px 13px;
-  border: 0;
-  border-radius: 9px;
+  gap: 15px;
+  padding: 12px 17px;
+  border: 1px solid transparent;
+  border-radius: 15px;
   background: transparent;
-  color: #68776d;
+  color: #243253;
   font: inherit;
-  font-size: 13px;
+  font-size: 15px;
+  font-weight: 550;
   text-align: left;
   cursor: pointer;
+  transition: background 180ms ease, color 180ms ease;
 }
 
 .sidebar-link:hover {
-  background: #f3f8f4;
-  color: #16784b;
+  background: #f0f5ff;
+  color: #2167ef;
 }
 
 .sidebar-link.active {
-  background: #eaf5ed;
-  color: #16784b;
-  font-weight: 700;
+  border-color: #e0eaff;
+  background: linear-gradient(110deg, #e5efff, #edf2ff);
+  color: #1761ee;
+  font-weight: 750;
 }
 
 .sidebar-link-icon {
-  width: 19px;
-  font-size: 19px;
+  width: 25px;
+  flex-shrink: 0;
+  font-size: 23px;
+  line-height: 1;
   text-align: center;
+}
+
+.sidebar-promo {
+  margin-top: auto;
+  padding: 22px 22px 20px;
+  border: 1px solid #e1eaff;
+  border-radius: 23px;
+  background:
+    radial-gradient(circle at 100% 100%, #e9e6ff 0, transparent 48%),
+    linear-gradient(145deg, #edf5ff, #fff 85%);
+}
+
+.promo-chart {
+  width: 85px;
+  height: 63px;
+  display: grid;
+  place-items: center;
+  margin-bottom: 12px;
+  border-radius: 16px;
+  background: #ffffffc9;
+  box-shadow: 0 8px 24px #5285e51c;
+}
+
+.promo-chart svg {
+  width: 75px;
+}
+
+.sidebar-promo h3 {
+  margin: 0;
+  color: #101b3a;
+  font-size: 18px;
+  line-height: 1.35;
+  letter-spacing: -0.5px;
+}
+
+.sidebar-promo p {
+  margin: 10px 0 0;
+  color: #667795;
+  font-size: 14px;
+  line-height: 1.6;
 }
 
 .sidebar-bottom {
   display: flex;
   align-items: center;
-  gap: 10px;
-  margin-top: auto;
-  padding: 16px 9px 0;
-  border-top: 1px solid #edf1ed;
+  gap: 11px;
+  margin-top: 22px;
+  padding: 17px 10px 0;
+  border-top: 1px solid #e7edf7;
 }
 
 .sidebar-status-dot {
   width: 9px;
   height: 9px;
+  flex-shrink: 0;
   border-radius: 50%;
-  background: #d89b31;
+  background: #12c897;
+  box-shadow: 0 0 0 4px #12c89720;
 }
 
 .sidebar-bottom strong,
@@ -118,6 +172,56 @@
 
 .sidebar-bottom span {
   margin-top: 4px;
-  color: #8b978e;
+  color: #8491aa;
   font-size: 11px;
+}
+
+@media (max-width: 1000px) {
+  .sidebar {
+    width: 245px;
+    min-width: 245px;
+  }
+
+  .brand-copy h2 {
+    font-size: 21px;
+  }
+
+  .sidebar-promo {
+    padding: 17px;
+  }
+}
+
+@media (max-width: 700px) {
+  .sidebar {
+    width: 75px;
+    min-width: 75px;
+    padding: 22px 8px;
+  }
+
+  .sidebar-brand {
+    justify-content: center;
+    padding: 0 0 30px;
+  }
+
+  .brand-mark {
+    width: 44px;
+  }
+
+  .brand-copy,
+  .sidebar-section-label,
+  .sidebar-link > span:last-child,
+  .sidebar-promo,
+  .sidebar-bottom > div {
+    display: none;
+  }
+
+  .sidebar-link {
+    justify-content: center;
+    padding: 12px 4px;
+  }
+
+  .sidebar-bottom {
+    justify-content: center;
+    padding: 18px 0 0;
+  }
 }

@@ -5,7 +5,7 @@ import numpy as np
 import pandas as pd
 from sklearn.model_selection import GroupShuffleSplit
 
-from causal_model import estimate_ate
+from backend.causal_model import estimate_ate
 
 
 ROOT = Path(__file__).resolve().parents[1]

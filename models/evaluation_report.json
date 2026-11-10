@@ -1,0 +1,299 @@
+{
+  "timestamp": "2026-11-05T10:34:46.521340+00:00",
+  "version": "v1.0.0",
+  "train_records": 6000,
+  "validation_records": 2000,
+  "test_records": 2000,
+  "classification": {
+    "target": "purchase",
+    "best_model": "hist_gradient_boosting",
+    "tuning_summary": {
+      "best_params": {
+        "max_leaf_nodes": 15,
+        "learning_rate": 0.05,
+        "l2_regularization": 0.0
+      },
+      "best_validation_score": 0.6316323880281478,
+      "best_validation_metrics": {
+        "accuracy": 0.7085,
+        "precision": 0.515625,
+        "recall": 0.05641025641025641,
+        "f1": 0.1016949152542373,
+        "roc_auc": 0.6316323880281478,
+        "pr_auc": 0.4091548234663215,
+        "brier_score": 0.19835339988126743
+      },
+      "trials_evaluated": 5,
+      "tuning_history": [
+        {
+          "params": {
+            "max_leaf_nodes": 15,
+            "learning_rate": 0.05,
+            "l2_regularization": 0.0
+          },
+          "score": 0.6316323880281478,
+          "metrics": {
+            "accuracy": 0.7085,
+            "precision": 0.515625,
+            "recall": 0.05641025641025641,
+            "f1": 0.1016949152542373,
+            "roc_auc": 0.6316323880281478,
+            "pr_auc": 0.4091548234663215,
+            "brier_score": 0.19835339988126743
+          }
+        },
+        {
+          "params": {
+            "max_leaf_nodes": 15,
+            "learning_rate": 0.1,
+            "l2_regularization": 1.0
+          },
+          "score": 0.6157844824982635,
+          "metrics": {
+            "accuracy": 0.706,
+            "precision": 0.4819277108433735,
+            "recall": 0.06837606837606838,
+            "f1": 0.11976047904191617,
+            "roc_auc": 0.6157844824982635,
+            "pr_auc": 0.4032260066775693,
+            "brier_score": 0.19977245467815918
+          }
+        },
+        {
+          "params": {
+            "max_leaf_nodes": 31,
+            "learning_rate": 0.05,
+            "l2_regularization": 1.0
+          },
+          "score": 0.6215088641237052,
+          "metrics": {
+            "accuracy": 0.709,
+            "precision": 0.5172413793103449,
+            "recall": 0.07692307692307693,
+            "f1": 0.13392857142857142,
+            "roc_auc": 0.6215088641237052,
+            "pr_auc": 0.3991469276507084,
+            "brier_score": 0.1994036614826959
+          }
+        },
+        {
+          "params": {
+            "max_leaf_nodes": 31,
+            "learning_rate": 0.1,
+            "l2_regularization": 1.0
+          },
+          "score": 0.607947811905409,
+          "metrics": {
+            "accuracy": 0.7035,
+            "precision": 0.46875,
+            "recall": 0.10256410256410256,
+            "f1": 0.16830294530154277,
+            "roc_auc": 0.607947811905409,
+            "pr_auc": 0.3870548154346509,
+            "brier_score": 0.20295041051961313
+          }
+        },
+        {
+          "params": {
+            "max_leaf_nodes": 63,
+            "learning_rate": 0.05,
+            "l2_regularization": 2.0
+          },
+          "score": 0.6008873184138201,
+          "metrics": {
+            "accuracy": 0.7045,
+            "precision": 0.47540983606557374,
+            "recall": 0.09914529914529914,
+            "f1": 0.16407355021216408,
+            "roc_auc": 0.6008873184138201,
+            "pr_auc": 0.3824001089644048,
+            "brier_score": 0.203420638355396
+          }
+        }
+      ]
+    },
+    "baseline_validation": {
+      "accuracy": 0.7075,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "roc_auc": 0.5,
+      "pr_auc": 0.2925,
+      "brier_score": 0.20695844444444447
+    },
+    "candidate_validation_comparison": {
+      "dummy_prior": {
+        "accuracy": 0.7075,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "roc_auc": 0.5,
+        "pr_auc": 0.2925,
+        "brier_score": 0.20695844444444447
+      },
+      "logistic_regression": {
+        "accuracy": 0.7105,
+        "precision": 0.5833333333333334,
+        "recall": 0.035897435897435895,
+        "f1": 0.06763285024154589,
+        "roc_auc": 0.6384416055087434,
+        "pr_auc": 0.4314922969285393,
+        "brier_score": 0.1965367488357834
+      },
+      "random_forest": {
+        "accuracy": 0.709,
+        "precision": 0.5238095238095238,
+        "recall": 0.05641025641025641,
+        "f1": 0.10185185185185185,
+        "roc_auc": 0.6182773096554015,
+        "pr_auc": 0.3950603404347394,
+        "brier_score": 0.19965448882909181
+      },
+      "hist_gradient_boosting": {
+        "accuracy": 0.705,
+        "precision": 0.4789915966386555,
+        "recall": 0.09743589743589744,
+        "f1": 0.16193181818181818,
+        "roc_auc": 0.599554226692036,
+        "pr_auc": 0.38410967635074866,
+        "brier_score": 0.2045339885045045
+      }
+    },
+    "final_test_metrics": {
+      "accuracy": 0.715,
+      "precision": 0.39344262295081966,
+      "recall": 0.04308797127468582,
+      "f1": 0.07766990291262135,
+      "roc_auc": 0.5831003631721764,
+      "pr_auc": 0.3421821675791913,
+      "brier_score": 0.19864088236478245
+    },
+    "artifact_path": "D:\\EconoCausal\\models\\artifacts\\hist_gradient_boosting_purchase_v1.0.0.joblib"
+  },
+  "regression": {
+    "target": "revenue",
+    "best_model": "hist_gradient_boosting",
+    "tuning_summary": {
+      "best_params": {
+        "max_leaf_nodes": 15,
+        "learning_rate": 0.05,
+        "l2_regularization": 0.0
+      },
+      "best_validation_score": -40.347411408218214,
+      "best_validation_metrics": {
+        "mae": 26.1101991768115,
+        "rmse": 40.347411408218214,
+        "r2": 0.12225020311330115
+      },
+      "trials_evaluated": 5,
+      "tuning_history": [
+        {
+          "params": {
+            "max_leaf_nodes": 15,
+            "learning_rate": 0.05,
+            "l2_regularization": 0.0
+          },
+          "score": -40.347411408218214,
+          "metrics": {
+            "mae": 26.1101991768115,
+            "rmse": 40.347411408218214,
+            "r2": 0.12225020311330115
+          }
+        },
+        {
+          "params": {
+            "max_leaf_nodes": 15,
+            "learning_rate": 0.1,
+            "l2_regularization": 1.0
+          },
+          "score": -40.888532150222815,
+          "metrics": {
+            "mae": 26.042479434939946,
+            "rmse": 40.888532150222815,
+            "r2": 0.09854837769403157
+          }
+        },
+        {
+          "params": {
+            "max_leaf_nodes": 31,
+            "learning_rate": 0.05,
+            "l2_regularization": 1.0
+          },
+          "score": -40.433492874933314,
+          "metrics": {
+            "mae": 25.98173312216747,
+            "rmse": 40.433492874933314,
+            "r2": 0.1185008378371496
+          }
+        },
+        {
+          "params": {
+            "max_leaf_nodes": 31,
+            "learning_rate": 0.1,
+            "l2_regularization": 1.0
+          },
+          "score": -40.8784261433221,
+          "metrics": {
+            "mae": 25.875302539805705,
+            "rmse": 40.8784261433221,
+            "r2": 0.09899392807276808
+          }
+        },
+        {
+          "params": {
+            "max_leaf_nodes": 63,
+            "learning_rate": 0.05,
+            "l2_regularization": 2.0
+          },
+          "score": -40.90259691505862,
+          "metrics": {
+            "mae": 25.905194275946116,
+            "rmse": 40.90259691505862,
+            "r2": 0.09792811156996273
+          }
+        }
+      ]
+    },
+    "baseline_validation": {
+      "mae": 27.070862063333337,
+      "rmse": 43.083066683246265,
+      "r2": -0.0008122269915553648
+    },
+    "candidate_validation_comparison": {
+      "dummy_mean": {
+        "mae": 27.070862063333337,
+        "rmse": 43.083066683246265,
+        "r2": -0.0008122269915553648
+      },
+      "ridge": {
+        "mae": 26.245755976696465,
+        "rmse": 39.266940483896335,
+        "r2": 0.168631600902039
+      },
+      "random_forest": {
+        "mae": 25.964451446202713,
+        "rmse": 38.46433481507435,
+        "r2": 0.20227016120524866
+      },
+      "hist_gradient_boosting": {
+        "mae": 25.93733047918697,
+        "rmse": 41.06916603628712,
+        "r2": 0.09056607188286014
+      }
+    },
+    "final_test_metrics": {
+      "mae": 26.14261348079876,
+      "rmse": 39.871776797118855,
+      "r2": 0.1323474837224229
+    },
+    "artifact_path": "D:\\EconoCausal\\models\\artifacts\\hist_gradient_boosting_revenue_v1.0.0.joblib"
+  },
+  "causal_effect_benchmark": {
+    "pehe": 0.043883894340278826,
+    "ate_true": 0.054047500000000005,
+    "ate_estimated": 0.05099130579798018,
+    "ate_error": 0.0030561942020198227,
+    "effect_correlation": 0.033861278377873456,
+    "causal_disclaimer": "Causal effect estimation accuracy (PEHE, ATE error) measures counterfactual contrast fidelity and is strictly separated from observational predictive accuracy (ROC-AUC / R\u00b2)."
+  }
+}

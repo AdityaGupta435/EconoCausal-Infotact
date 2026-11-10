@@ -1,0 +1,162 @@
+{
+  "evaluation": "Phase 7 Advanced Promotion Optimization Engine",
+  "timestamp": "2026-11-05T05:38:19.956156+00:00",
+  "campaign_summary": {
+    "objective": "incremental_revenue",
+    "budget": 2500.0,
+    "total_spend": 2068.67,
+    "unused_budget": 431.33,
+    "budget_utilization_pct": 0.8275,
+    "total_customers": 400,
+    "targeted_customers": 393,
+    "targeting_rate": 0.9825,
+    "total_expected_incremental_demand": 47.6482,
+    "total_expected_incremental_revenue": 1250.13,
+    "total_expected_incremental_profit": null,
+    "campaign_roi": 0.6043,
+    "solver_status": "optimal",
+    "cost_model": "redemption",
+    "discount_distribution": {
+      "5.0%": 6,
+      "10.0%": 6,
+      "15.0%": 14,
+      "20.0%": 367,
+      "0% (No Promo)": 7
+    },
+    "segment_breakdown": {
+      "Persuadables": {
+        "total_customers": 274,
+        "targeted_customers": 274,
+        "spend": 1497.6818529479992,
+        "incremental_revenue": 977.2563665720002,
+        "incremental_demand": 35.41737700000004
+      },
+      "Sure Things": {
+        "total_customers": 67,
+        "targeted_customers": 66,
+        "spend": 314.0078564405,
+        "incremental_revenue": 130.4835892695001,
+        "incremental_demand": 6.630667000000002
+      },
+      "Lost Causes": {
+        "total_customers": 54,
+        "targeted_customers": 53,
+        "spend": 256.98237905649995,
+        "incremental_revenue": 142.3860443135001,
+        "incremental_demand": 5.600124
+      },
+      "Sleeping Dogs": {
+        "total_customers": 5,
+        "targeted_customers": 0,
+        "spend": 0.0,
+        "incremental_revenue": 0.0,
+        "incremental_demand": 0.0
+      },
+      "Unclassified": {
+        "total_customers": 0,
+        "targeted_customers": 0,
+        "spend": 0.0,
+        "incremental_revenue": 0.0,
+        "incremental_demand": 0.0
+      }
+    }
+  },
+  "scenario_comparison": [
+    {
+      "scenario_name": "1. Low Budget ($1,000)",
+      "budget": 1000.0,
+      "spend": 999.99,
+      "budget_utilization_pct": 1.0,
+      "targeted_customers": 348,
+      "targeting_rate": 0.87,
+      "expected_incremental_conversions": 27.8709,
+      "expected_incremental_revenue": 929.93,
+      "campaign_roi": 0.9299,
+      "persuadables_share": 0.7385,
+      "solver_status": "optimal"
+    },
+    {
+      "scenario_name": "2. Baseline Budget ($2,500)",
+      "budget": 2500.0,
+      "spend": 2068.67,
+      "budget_utilization_pct": 0.8275,
+      "targeted_customers": 393,
+      "targeting_rate": 0.9825,
+      "expected_incremental_conversions": 47.6482,
+      "expected_incremental_revenue": 1250.13,
+      "campaign_roi": 0.6043,
+      "persuadables_share": 0.6972,
+      "solver_status": "optimal"
+    },
+    {
+      "scenario_name": "3. High Budget ($5,000)",
+      "budget": 5000.0,
+      "spend": 2068.67,
+      "budget_utilization_pct": 0.4137,
+      "targeted_customers": 393,
+      "targeting_rate": 0.9825,
+      "expected_incremental_conversions": 47.6482,
+      "expected_incremental_revenue": 1250.13,
+      "campaign_roi": 0.6043,
+      "persuadables_share": 0.6972,
+      "solver_status": "optimal"
+    },
+    {
+      "scenario_name": "4. Shallow Discounts (5%, 10%)",
+      "budget": 2500.0,
+      "spend": 891.64,
+      "budget_utilization_pct": 0.3567,
+      "targeted_customers": 393,
+      "targeting_rate": 0.9825,
+      "expected_incremental_conversions": 24.1357,
+      "expected_incremental_revenue": 791.53,
+      "campaign_roi": 0.8877,
+      "persuadables_share": 0.6972,
+      "solver_status": "optimal"
+    },
+    {
+      "scenario_name": "5. Deep Discounts (15%, 20%)",
+      "budget": 2500.0,
+      "spend": 2070.34,
+      "budget_utilization_pct": 0.8281,
+      "targeted_customers": 387,
+      "targeting_rate": 0.9675,
+      "expected_incremental_conversions": 47.6655,
+      "expected_incremental_revenue": 1249.25,
+      "campaign_roi": 0.6034,
+      "persuadables_share": 0.7054,
+      "solver_status": "optimal"
+    },
+    {
+      "scenario_name": "6. Persuadables-Only Policy",
+      "budget": 2500.0,
+      "spend": 1497.68,
+      "budget_utilization_pct": 0.5991,
+      "targeted_customers": 274,
+      "targeting_rate": 0.685,
+      "expected_incremental_conversions": 35.4174,
+      "expected_incremental_revenue": 977.26,
+      "campaign_roi": 0.6525,
+      "persuadables_share": 1.0,
+      "solver_status": "optimal"
+    },
+    {
+      "scenario_name": "7. Uplift Conversions Objective",
+      "budget": 2500.0,
+      "spend": 2147.24,
+      "budget_utilization_pct": 0.8589,
+      "targeted_customers": 395,
+      "targeting_rate": 0.9875,
+      "expected_incremental_conversions": 48.5936,
+      "expected_incremental_revenue": 1242.7,
+      "campaign_roi": 0.5787,
+      "persuadables_share": 0.6937,
+      "solver_status": "optimal"
+    }
+  ],
+  "artifact_paths": {
+    "allocation_report": "D:\\EconoCausal\\data\\synthetic\\promotion_allocation_report.json",
+    "customer_allocations": "D:\\EconoCausal\\data\\synthetic\\promotion_customer_allocations.csv",
+    "scenario_comparison": "D:\\EconoCausal\\data\\synthetic\\promotion_scenario_comparison.json"
+  }
+}

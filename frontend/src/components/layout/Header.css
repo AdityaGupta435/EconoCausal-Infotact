@@ -1,60 +1,202 @@
 
 .dashboard-header {
+  min-height: 91px;
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
   gap: 20px;
-  padding: 28px 34px;
-  border-bottom: 1px solid #e9eee9;
-  background: #ffffff;
+  margin: 18px 19px 0;
+  padding: 15px 28px;
+  border: 1px solid #edf1fa;
+  border-radius: 23px;
+  background: #ffffffed;
+  box-shadow: 0 5px 24px #5b7ba30a;
 }
 
-.header-eyebrow {
-  color: #16804e;
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 1.5px;
+.header-search {
+  width: min(420px, 52%);
+  min-height: 49px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 16px;
+  border: 1px solid transparent;
+  border-radius: 15px;
+  background: #f1f4fa;
+  color: #7283a3;
 }
 
-.header-heading h1 {
-  margin: 8px 0 6px;
-  color: #203329;
-  font-size: 27px;
-  letter-spacing: -0.9px;
+.header-search:focus-within {
+  border-color: #9abaff;
+  box-shadow: 0 0 0 3px #3278ff12;
 }
 
-.header-heading p {
-  margin: 0;
-  color: #829087;
-  font-size: 13px;
-  line-height: 1.6;
+.header-search svg {
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+}
+
+.header-search input {
+  width: 100%;
+  min-width: 0;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: #152344;
+  font: inherit;
+  font-size: 14px;
+}
+
+.header-search input::placeholder {
+  color: #7483a0;
 }
 
 .header-actions {
   display: flex;
   align-items: center;
-  gap: 17px;
+  gap: 22px;
 }
 
-.header-demo-badge {
-  padding: 7px 10px;
-  border: 1px solid #f0dfb5;
-  border-radius: 6px;
-  background: #fff9e9;
-  color: #966d16;
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 0.5px;
+.header-notification {
+  position: relative;
+  width: 37px;
+  height: 37px;
+  display: grid;
+  place-items: center;
+  border: 0;
+  border-radius: 11px;
+  background: transparent;
+  color: #637495;
+  cursor: pointer;
+}
+
+.header-notification:hover {
+  background: #f1f5ff;
+}
+
+.header-notification svg {
+  width: 24px;
+  height: 24px;
+}
+
+.header-notification span {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 9px;
+  height: 9px;
+  border: 2px solid white;
+  border-radius: 50%;
+  background: #f43f5e;
+}
+
+.header-profile {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-left: 20px;
+  border-left: 1px solid #edf0f7;
 }
 
 .header-avatar {
-  width: 38px;
-  height: 38px;
+  width: 40px;
+  height: 40px;
   display: grid;
   place-items: center;
   border-radius: 50%;
-  background: #eaf5ed;
-  color: #16784b;
-  font-size: 12px;
-  font-weight: 800;
+  background: linear-gradient(135deg, #1687ff, #813cff);
+  color: white;
+  font-size: 13px;
+  font-weight: 750;
+  box-shadow: 0 5px 12px #537bff30;
+}
+
+.header-user-name {
+  color: #172442;
+  font-size: 14px;
+  font-weight: 650;
+  white-space: nowrap;
+}
+
+.header-chevron {
+  color: #60718f;
+  font-size: 21px;
+}
+
+@media (max-width: 700px) {
+  .dashboard-header {
+    min-height: 74px;
+    margin: 10px;
+    padding: 12px;
+    border-radius: 16px;
+  }
+
+  .header-search {
+    width: 100%;
+    min-height: 42px;
+    padding: 0 10px;
+  }
+
+  .header-actions {
+    gap: 7px;
+  }
+
+  .header-notification,
+  .header-user-name,
+  .header-chevron {
+    display: none;
+  }
+
+  .header-profile {
+    padding-left: 8px;
+    border-left: 0;
+  }
+
+  .header-avatar {
+    width: 35px;
+    height: 35px;
+  }
+}
+
+.header-user-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.header-role-badge {
+  display: inline-block;
+  align-self: flex-start;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 1px 7px;
+  border-radius: 4px;
+}
+
+.badge-admin { background: #fee2e2; color: #991b1b; }
+.badge-analyst { background: #e0e7ff; color: #3730a3; }
+.badge-viewer { background: #f1f5f9; color: #475569; }
+
+.header-logout-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 6px 12px;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #64748b;
+  font-size: 12.5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.header-logout-btn:hover {
+  background: #fee2e2;
+  border-color: #fca5a5;
+  color: #dc2626;
 }

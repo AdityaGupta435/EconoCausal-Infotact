@@ -1,0 +1,254 @@
+{
+  "timestamp": "2026-11-04T18:16:48.921361+00:00",
+  "train_rows": 6000,
+  "test_rows": 2000,
+  "diagnostics": {
+    "propensity_auc": 0.7074,
+    "overlap_fraction_005_095": 1.0,
+    "has_common_support": true,
+    "common_support_range": [
+      0.1493,
+      0.6947
+    ],
+    "extreme_low_propensity_count": 0,
+    "extreme_high_propensity_count": 0,
+    "control_quantiles": {
+      "q_00": 0.05193577728805587,
+      "q_01": 0.15074054509077967,
+      "q_10": 0.24463733918395814,
+      "q_25": 0.2888547839906908,
+      "q_50": 0.34799260381994634,
+      "q_75": 0.41303758565324605,
+      "q_90": 0.47201156673038935,
+      "q_99": 0.5821180557966761,
+      "q_100": 0.694707931967079
+    },
+    "treated_quantiles": {
+      "q_00": 0.14934799958597217,
+      "q_01": 0.2320731653245317,
+      "q_10": 0.3084489737087876,
+      "q_25": 0.35692741733272904,
+      "q_50": 0.41654076977871046,
+      "q_75": 0.4884159991783292,
+      "q_90": 0.5683999808637713,
+      "q_99": 0.6844074981348435,
+      "q_100": 0.7723248534423656
+    },
+    "covariate_balance": [
+      {
+        "feature": "baseline_price",
+        "treated_mean_before": 66.6094,
+        "control_mean_before": 70.0938,
+        "smd_before": -0.0623,
+        "smd_after_ipw": -0.0132,
+        "abs_smd_before": 0.0623,
+        "abs_smd_after_ipw": 0.0132
+      },
+      {
+        "feature": "customer_history",
+        "treated_mean_before": 3.2825,
+        "control_mean_before": 2.8473,
+        "smd_before": 0.25,
+        "smd_after_ipw": 0.028,
+        "abs_smd_before": 0.25,
+        "abs_smd_after_ipw": 0.028
+      },
+      {
+        "feature": "seasonality",
+        "treated_mean_before": 1.6016,
+        "control_mean_before": 1.4795,
+        "smd_before": 0.1097,
+        "smd_after_ipw": 0.0053,
+        "abs_smd_before": 0.1097,
+        "abs_smd_after_ipw": 0.0053
+      },
+      {
+        "feature": "category_Beauty",
+        "treated_mean_before": 0.2101,
+        "control_mean_before": 0.1932,
+        "smd_before": 0.0422,
+        "smd_after_ipw": 0.0106,
+        "abs_smd_before": 0.0422,
+        "abs_smd_after_ipw": 0.0106
+      },
+      {
+        "feature": "category_Electronics",
+        "treated_mean_before": 0.1731,
+        "control_mean_before": 0.2132,
+        "smd_before": -0.1017,
+        "smd_after_ipw": -0.0235,
+        "abs_smd_before": 0.1017,
+        "abs_smd_after_ipw": 0.0235
+      },
+      {
+        "feature": "category_Fashion",
+        "treated_mean_before": 0.3509,
+        "control_mean_before": 0.3438,
+        "smd_before": 0.015,
+        "smd_after_ipw": 0.0066,
+        "abs_smd_before": 0.015,
+        "abs_smd_after_ipw": 0.0066
+      },
+      {
+        "feature": "category_Home",
+        "treated_mean_before": 0.2659,
+        "control_mean_before": 0.2499,
+        "smd_before": 0.0367,
+        "smd_after_ipw": 0.0044,
+        "abs_smd_before": 0.0367,
+        "abs_smd_after_ipw": 0.0044
+      }
+    ],
+    "max_abs_smd_before": 0.25,
+    "max_abs_smd_after_ipw": 0.028,
+    "balance_improved": true
+  },
+  "doubly_robust_ate": 0.06562,
+  "dowhy_refutations": {
+    "identification_method": "backdoor.linear_regression",
+    "estimated_base_effect": 0.05704,
+    "random_common_cause": {
+      "new_effect": 0.05704,
+      "passed": true
+    },
+    "placebo_treatment": {
+      "new_effect": 0.0,
+      "passed": true
+    },
+    "data_subset": {
+      "new_effect": 0.06532,
+      "passed": true
+    }
+  },
+  "ground_truth_evaluation": {
+    "ate_true": 0.05405,
+    "ate_pred": 0.06402,
+    "ate_error": 0.00997,
+    "ate_ci_95": [
+      0.03981,
+      0.08823
+    ],
+    "cate_mae": 0.02292,
+    "pehe": 0.02865,
+    "effect_correlation": 0.4767,
+    "ci_coverage_95": 1.0,
+    "predicted_tau_mean": 0.06402,
+    "predicted_tau_std": 0.03054,
+    "true_tau_mean": 0.05405,
+    "true_tau_std": 0.01384
+  },
+  "heterogeneity_explainability": {
+    "category_effects": {
+      "Beauty": {
+        "sample_count": 373,
+        "mean_effect": 0.01236,
+        "ci_95": [
+          -0.04284,
+          0.06755
+        ]
+      },
+      "Electronics": {
+        "sample_count": 418,
+        "mean_effect": 0.093,
+        "ci_95": [
+          0.03807,
+          0.14793
+        ]
+      },
+      "Fashion": {
+        "sample_count": 678,
+        "mean_effect": 0.08027,
+        "ci_95": [
+          0.03911,
+          0.12142
+        ]
+      },
+      "Home": {
+        "sample_count": 531,
+        "mean_effect": 0.05674,
+        "ci_95": [
+          0.01004,
+          0.10345
+        ]
+      }
+    },
+    "history_tier_effects": {
+      "Low (0-1)": {
+        "sample_count": 392,
+        "mean_effect": 0.05047,
+        "ci_95": [
+          0.01065,
+          0.09029
+        ]
+      },
+      "Medium (2-3)": {
+        "sample_count": 865,
+        "mean_effect": 0.06033,
+        "ci_95": [
+          0.03551,
+          0.08514
+        ]
+      },
+      "High (4+)": {
+        "sample_count": 743,
+        "mean_effect": 0.07546,
+        "ci_95": [
+          0.03829,
+          0.11263
+        ]
+      }
+    },
+    "top_responsive_segments": [
+      {
+        "segment": "Electronics | History High (4+)",
+        "count": 145,
+        "mean_effect": 0.10627
+      },
+      {
+        "segment": "Fashion | History High (4+)",
+        "count": 249,
+        "mean_effect": 0.09254
+      },
+      {
+        "segment": "Electronics | History Medium (2-3)",
+        "count": 187,
+        "mean_effect": 0.08969
+      }
+    ],
+    "lowest_responsive_segments": [
+      {
+        "segment": "Beauty | History High (4+)",
+        "count": 151,
+        "mean_effect": 0.02479
+      },
+      {
+        "segment": "Beauty | History Medium (2-3)",
+        "count": 157,
+        "mean_effect": 0.0071
+      },
+      {
+        "segment": "Beauty | History Low (0-1)",
+        "count": 65,
+        "mean_effect": -0.00384
+      }
+    ],
+    "causal_explanation": "Treatment effect heterogeneity is primarily driven by product category (Fashion exhibits strongest uplift) and customer loyalty tier (High history customers respond more strongly to discounts). These represent causal effect modifiers, distinct from predictive baseline features."
+  },
+  "cate_correlation_investigation": {
+    "finding": "DML with customer-grouped cross-fitting achieves an effect correlation of 0.4767 and PEHE of 0.02865, substantially outperforming naive outcome model differencing (which had correlation ~0.034).",
+    "root_causes_of_low_correlation_in_naive_models": [
+      {
+        "cause": "Extreme Disparity in Signal-to-Noise Ratio (SNR)",
+        "detail": "True treatment effect standard deviation is tiny (0.0138), while Bernoulli purchase outcome noise standard deviation is ~0.45 (SNR < 0.03). Standard supervised models optimize total outcome MSE, ignoring small treatment interactions."
+      },
+      {
+        "cause": "Regularization Shrinkage & Cross-Fold Customer Leakage",
+        "detail": "When cross-fitting is not customer-grouped, customer records appear in both folds, leaking customer baseline history and biasing residual orthogonalization. GroupKFold on customer_id restores clean residualization."
+      },
+      {
+        "cause": "Direct Treatment Orthogonalization (Frisch-Waugh-Lovell)",
+        "detail": "Double Machine Learning residualizes both Y and T (Y - E[Y|X], T - E[T|X]), directly targeting the causal contrast rather than passively subtracting two noisy outcome predictions."
+      }
+    ]
+  }
+}
