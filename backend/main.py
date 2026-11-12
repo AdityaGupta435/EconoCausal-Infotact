@@ -6,7 +6,10 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 from fastapi import FastAPI, File, HTTPException, UploadFile
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
+
+from backend import config
 
 from backend.causal_model import DATA_DIR, estimate_ate
 from backend.drift_detection import generate_drift_report
@@ -14,7 +17,7 @@ from backend.optimization import (
     build_optimization_problem,
     solve_optimization_problem,
 )
-from backend.database import get_db, init_db_indexes, close_db_connection
+from backend.database import get_db, init_db_indexes, close_db_connection, check_db_health
 from backend.api_v1 import router as api_v1_router
 
 logger = logging.getLogger("econocausal.main")
@@ -27,12 +30,14 @@ UPLIFT_REPORT = ROOT / "data" / "synthetic" / "uplift_evaluation.json"
 async def lifespan(app: FastAPI):
     """Application lifecycle management for database connections and indexing."""
     try:
-        db = get_db()
-        if db is not None:
-            init_db_indexes(db)
-            logger.info("MongoDB initialized and indexes verified on startup.")
+        health = check_db_health()
+        if health.get("status") == "healthy":
+            db = get_db()
+            if db is not None:
+                init_db_indexes(db)
+                logger.info("MongoDB initialized and indexes verified on startup.")
         else:
-            logger.info("Operating without active MongoDB connection.")
+            logger.info("Operating without active MongoDB connection (%s).", health.get("status"))
     except Exception as exc:
         logger.warning("Could not initialize database on startup: %s", str(exc))
 
@@ -46,6 +51,16 @@ app = FastAPI(
     description="Causal inference for dynamic pricing",
     version="0.1.0",
     lifespan=lifespan,
+)
+
+# CORS configuration for secure cross-origin requests
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=config.CORS_ORIGINS,
+    allow_origin_regex=r"https://.*\.vercel\.app",
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 # Mount Phase 8 Authentication, Authorization, Database and Persistence API routes

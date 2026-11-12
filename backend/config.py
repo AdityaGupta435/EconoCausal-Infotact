@@ -77,3 +77,8 @@ DEFAULT_MAX_PRICE_CHANGE_PCT = float(os.getenv("DEFAULT_MAX_PRICE_CHANGE_PCT", "
 DEFAULT_PROMOTION_BUDGET = float(os.getenv("DEFAULT_PROMOTION_BUDGET", "2500.0"))
 DEFAULT_ALLOWED_DISCOUNTS = (5.0, 10.0, 15.0, 20.0)
 
+# CORS Configuration
+_raw_cors = os.getenv("CORS_ORIGINS", "http://localhost:5173,http://localhost:3000,http://127.0.0.1:5173,http://127.0.0.1:8000")
+CORS_ORIGINS = [origin.strip() for origin in _raw_cors.split(",") if origin.strip()]
+
+

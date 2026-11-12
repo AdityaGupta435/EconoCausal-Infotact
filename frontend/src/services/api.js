@@ -4,7 +4,7 @@
  * and standard response envelopes. No endpoint logic is duplicated in components.
  */
 
-const BASE_URL = "";
+const BASE_URL = (import.meta.env.VITE_API_BASE_URL || "").replace(/\/+$/, "");
 
 function getToken() {
   return localStorage.getItem("econocausal_token") || null;
